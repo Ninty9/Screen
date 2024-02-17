@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy2c6845m3gxx"]
+
+[ext_resource type="Script" path="res://RevealText.cs" id="1_bei8u"]
+[ext_resource type="Theme" uid="uid://ct57t5xfmm2w6" path="res://CsText.tres" id="1_p8cg3"]
+[ext_resource type="Script" path="res://Console.cs" id="3_nfy56"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h7ayg"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5ecnf"]
+viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ut8uk"]
+size = Vector3(1.78455, 0.28949, 0.0430298)
+
+[node name="Main" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.21726)
+texture = SubResource("ViewportTexture_h7ayg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475028, -3.21726)
+
+[node name="Sprite3D2" type="Sprite3D" parent="StaticBody3D"]
+texture = SubResource("ViewportTexture_5ecnf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00274658, 0.00357056, 0.040863)
+shape = SubResource("BoxShape3D_ut8uk")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(180, 60)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport"]
+custom_minimum_size = Vector2(100, 0)
+theme = ExtResource("1_p8cg3")
+text = "ababa"
+fit_content = true
+drag_and_drop_selection_enabled = false
+visible_characters_behavior = 1
+script = ExtResource("1_bei8u")
+revealSpeed = 3.0
+
+[node name="SubViewport2" type="SubViewport" parent="."]
+size = Vector2i(180, 30)
+
+[node name="LineEdit" type="LineEdit" parent="SubViewport2"]
+custom_minimum_size = Vector2(1100, 0)
+offset_left = 10.0
+offset_right = 1110.0
+offset_bottom = 25.0
+theme = ExtResource("1_p8cg3")
+script = ExtResource("3_nfy56")
+
+[connection signal="mouse_entered" from="StaticBody3D" to="SubViewport2/LineEdit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="StaticBody3D" to="SubViewport2/LineEdit" method="_on_mouse_exited"]
+[connection signal="text_submitted" from="SubViewport2/LineEdit" to="SubViewport2/LineEdit" method="_on_text_submitted"]

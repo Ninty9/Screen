@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw8j5llrt630x"]
+
+[ext_resource type="Theme" uid="uid://ct57t5xfmm2w6" path="res://CsText.tres" id="1_4psgs"]
+[ext_resource type="Script" path="res://RevealText.cs" id="2_hbgcl"]
+
+[node name="RichTextLabel" type="RichTextLabel"]
+custom_minimum_size = Vector2(100, 0)
+theme = ExtResource("1_4psgs")
+text = "ababa"
+fit_content = true
+drag_and_drop_selection_enabled = false
+visible_characters_behavior = 1
+script = ExtResource("2_hbgcl")
+revealSpeed = 3.0
