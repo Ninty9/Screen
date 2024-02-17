@@ -1,60 +1,113 @@
-[gd_scene load_steps=7 format=3 uid="uid://dy2c6845m3gxx"]
+[gd_scene load_steps=9 format=3 uid="uid://dy2c6845m3gxx"]
 
-[ext_resource type="Script" path="res://RevealText.cs" id="1_bei8u"]
+[ext_resource type="Script" path="res://CamPos.cs" id="1_6cqrj"]
 [ext_resource type="Theme" uid="uid://ct57t5xfmm2w6" path="res://CsText.tres" id="1_p8cg3"]
+[ext_resource type="Script" path="res://CamManager.cs" id="1_xe4c0"]
 [ext_resource type="Script" path="res://Console.cs" id="3_nfy56"]
+[ext_resource type="PackedScene" uid="uid://dw8j5llrt630x" path="res://rich_text_label.tscn" id="3_wlu8x"]
+[ext_resource type="PackedScene" uid="uid://bi4em4tvqyrgb" path="res://screen.blend" id="6_1o5mr"]
+[ext_resource type="PackedScene" uid="uid://dwk3d7kknqb2d" path="res://server.blend" id="7_nusjb"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_h7ayg"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_5ecnf"]
-viewport_path = NodePath("SubViewport2")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ut8uk"]
-size = Vector3(1.78455, 0.28949, 0.0430298)
+viewport_path = NodePath("TerminalViewport")
 
 [node name="Main" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="CamHolder" type="Node3D" parent="." node_paths=PackedStringArray("camera", "camPos")]
+script = ExtResource("1_xe4c0")
+camera = NodePath("Camera3D")
+camPos = NodePath("CamPos1")
+moveDuration = 1.0
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.21726)
+[node name="Camera3D" type="Camera3D" parent="CamHolder"]
+
+[node name="CamPos1" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Left", "Up")]
+script = ExtResource("1_6cqrj")
+Left = NodePath("../CamPos3")
+Up = NodePath("../CamPos2")
+
+[node name="CamPos3" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Right")]
+transform = Transform3D(0.573105, 0, 0.819482, 0, 1, 0, -0.819482, 0, 0.573105, -0.623004, -1.19209e-07, 0.644943)
+script = ExtResource("1_6cqrj")
+Right = NodePath("../CamPos1")
+
+[node name="CamPos2" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Down")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.670922, 0)
+script = ExtResource("1_6cqrj")
+Down = NodePath("../CamPos1")
+
+[node name="TerminalViewport" type="SubViewport" parent="."]
+size = Vector2i(1080, 370)
+
+[node name="Node3D" type="Control" parent="TerminalViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_p8cg3")
+
+[node name="ColorRect" type="ColorRect" parent="TerminalViewport/Node3D"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TerminalViewport/Node3D" node_paths=PackedStringArray("input")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_nfy56")
+textPrefab = ExtResource("3_wlu8x")
+input = NodePath("../../../InputWindow/Control/LineEdit")
+
+[node name="InputWindow" type="Window" parent="."]
+disable_3d = true
+title = "Input"
+initial_position = 2
+size = Vector2i(200, 40)
+transient = true
+unresizable = true
+transparent = true
+
+[node name="Control" type="Control" parent="InputWindow"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineEdit" type="LineEdit" parent="InputWindow/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_p8cg3")
+caret_blink = true
+
+[node name="screen" parent="." instance=ExtResource("6_1o5mr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19928, -0.151295, -1.96038)
+
+[node name="Sprite3D" type="Sprite3D" parent="screen"]
+transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, -0.143253, -0.670443)
 texture = SubResource("ViewportTexture_h7ayg")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475028, -3.21726)
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149956, 1.31282, 2.03489)
 
-[node name="Sprite3D2" type="Sprite3D" parent="StaticBody3D"]
-texture = SubResource("ViewportTexture_5ecnf")
+[node name="Server Room" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 16)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00274658, 0.00357056, 0.040863)
-shape = SubResource("BoxShape3D_ut8uk")
+[node name="server" parent="Server Room" instance=ExtResource("7_nusjb")]
 
-[node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(180, 60)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport"]
-custom_minimum_size = Vector2(100, 0)
-theme = ExtResource("1_p8cg3")
-text = "ababa"
-fit_content = true
-drag_and_drop_selection_enabled = false
-visible_characters_behavior = 1
-script = ExtResource("1_bei8u")
-revealSpeed = 3.0
-
-[node name="SubViewport2" type="SubViewport" parent="."]
-size = Vector2i(180, 30)
-
-[node name="LineEdit" type="LineEdit" parent="SubViewport2"]
-custom_minimum_size = Vector2(1100, 0)
-offset_left = 10.0
-offset_right = 1110.0
-offset_bottom = 25.0
-theme = ExtResource("1_p8cg3")
-script = ExtResource("3_nfy56")
-
-[connection signal="mouse_entered" from="StaticBody3D" to="SubViewport2/LineEdit" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="StaticBody3D" to="SubViewport2/LineEdit" method="_on_mouse_exited"]
-[connection signal="text_submitted" from="SubViewport2/LineEdit" to="SubViewport2/LineEdit" method="_on_text_submitted"]
+[connection signal="text_submitted" from="InputWindow/Control/LineEdit" to="TerminalViewport/Node3D/VBoxContainer" method="_on_line_edit_text_submitted"]

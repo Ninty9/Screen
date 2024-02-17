@@ -4,7 +4,7 @@ using Screen.Commands;
 
 namespace Screen;
 
-public partial class Console : LineEdit
+public partial class Console : VBoxContainer
 {
     [Export] private PackedScene textPrefab;
     [Export] private LineEdit input;
@@ -14,18 +14,8 @@ public partial class Console : LineEdit
     {
         CommandList.Add(new BogosCommand(this));
     }
-
-    public void _on_mouse_entered()
-    {
-        GrabFocus();
-    }
     
-    public void _on_mouse_exited()
-    {
-        ReleaseFocus();
-    }
-    
-    public void _on_text_submitted(string text)
+    public void _on_line_edit_text_submitted(string text)
     {
         string[] args = text.ToLower().Split(" ");
         bool found = false;
