@@ -2,11 +2,12 @@
 
 namespace Screen.Commands;
 
-public abstract class Command
+public abstract partial class Command : Resource
 {
-    public abstract string Name { get; set; }
-    protected abstract Console Con { get; set; }
-    protected Command(Console c)
+    [Export] public string Name;
+    [Export] public string Description;
+    protected Console Con { get; private set; }
+    public void Init(Console c)
     {
         Con = c;
     }

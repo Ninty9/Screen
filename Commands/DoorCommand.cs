@@ -1,14 +1,11 @@
-﻿namespace Screen.Commands;
+﻿using Godot;
 
-public class DoorCommand : Command
+namespace Screen.Commands;
+
+public partial class DoorCommand : Command
 {
-    public DoorCommand(Console c) : base(c)
-    {
-    }
-
-    public override string Name { get; set; } = "door";
-    protected override Console Con { get; set; }
     
+    //array of doors
     public override void Run(string[] args)
     {
         //find door args[1]

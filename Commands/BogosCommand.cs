@@ -1,17 +1,16 @@
-﻿namespace Screen.Commands;
+namespace Screen.Commands;
 
-public class BogosCommand : Command
+public partial class BogosCommand : Command
 {
-    public override string Name { get; set; } = "bogos";
-    protected override Console Con { get; set; }
-    public BogosCommand(Console c) : base(c)
-    {
-        
-    }
-
+    
     public override void Run(string[] args)
     {
-        Con.Print("bogos binted");
+        if(args.Length < 2)
+        {
+            Con.Print("bogos binted");
+            return;
+        }
+        Con.Print(args[1] + " binted" + (args[1] == "bogos" ? "!" : "" ));
     }
 
 

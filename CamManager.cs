@@ -1,6 +1,6 @@
 using Godot;
-using System;
-using Screen;
+
+namespace Screen;
 
 public partial class CamManager : Node3D
 {
@@ -11,7 +11,8 @@ public partial class CamManager : Node3D
 
     public override void _Ready()
     {
-        
+        camera.Position = camPos.Position;
+        camera.Rotation = camPos.Rotation;
     }
 
     private void CamSwitch(Dirs dir)
@@ -48,18 +49,16 @@ public partial class CamManager : Node3D
     {
         Vector2 screenSize = GetViewport().GetVisibleRect().Size;
         // Mouse in viewport coordinates.
-        if (@event is InputEventMouseMotion eventMouseMotion)
-        {
-            position = eventMouseMotion.Position;
-            if (position.X > screenSize.X - (screenSize.X / 15))
-                CamSwitch(Dirs.Right);
-            else if (position.X < screenSize.X / 15)
-                CamSwitch(Dirs.Left);
-            else if (position.Y > screenSize.Y - (screenSize.Y / 10))
-                CamSwitch(Dirs.Down);
-            else if (position.Y < screenSize.Y / 10)
-                CamSwitch(Dirs.Up);
-        }
+        if (@event is not InputEventMouseMotion eventMouseMotion) return;
+        position = eventMouseMotion.Position;
+        if (position.X > screenSize.X - (screenSize.X / 15))
+            CamSwitch(Dirs.Right);
+        else if (position.X < screenSize.X / 15)
+            CamSwitch(Dirs.Left);
+        else if (position.Y > screenSize.Y - (screenSize.Y / 10))
+            CamSwitch(Dirs.Down);
+        else if (position.Y < screenSize.Y / 10)
+            CamSwitch(Dirs.Up);
     }
     
     private enum Dirs

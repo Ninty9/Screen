@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 using Screen.Commands;
 
 namespace Screen;
@@ -8,18 +9,22 @@ public partial class Console : VBoxContainer
 {
     [Export] private PackedScene textPrefab;
     [Export] private LineEdit input;
-    private static List<Command> CommandList = new ();
+    [Export] public Command[] commandList;
 
     public override void _Ready()
     {
-        CommandList.Add(new BogosCommand(this));
+        foreach (Command c in commandList)
+        {
+            c.Init(this);
+        }
     }
     
     public void _on_line_edit_text_submitted(string text)
     {
+        if(text == "") return;
         string[] args = text.ToLower().Split(" ");
         bool found = false;
-        foreach (Command c in CommandList)
+        foreach (Command c in commandList)
         {
             if (args[0] == c.Name)
             {
@@ -31,11 +36,14 @@ public partial class Console : VBoxContainer
         input.Clear();
     }
 
-    public void Print(string text)
+    public void Print(string text, string prefix = "")
     {
-        RichTextLabel label = textPrefab.Instantiate<RichTextLabel>();
-        AddChild(label);
-        label.Text = text;
-        MoveChild(input.GetParent(), GetChildCount()-1);
+        string[] texts = text.Split("|");
+        foreach (var t in texts)
+        {
+            RichTextLabel label = textPrefab.Instantiate<RichTextLabel>();
+            AddChild(label);
+            label.Text = prefix + t;
+        }
     }
 }

@@ -1,15 +1,29 @@
-[gd_scene load_steps=9 format=3 uid="uid://dy2c6845m3gxx"]
+[gd_scene load_steps=17 format=3 uid="uid://dy2c6845m3gxx"]
 
 [ext_resource type="Script" path="res://CamPos.cs" id="1_6cqrj"]
 [ext_resource type="Theme" uid="uid://ct57t5xfmm2w6" path="res://CsText.tres" id="1_p8cg3"]
 [ext_resource type="Script" path="res://CamManager.cs" id="1_xe4c0"]
 [ext_resource type="Script" path="res://Console.cs" id="3_nfy56"]
 [ext_resource type="PackedScene" uid="uid://dw8j5llrt630x" path="res://rich_text_label.tscn" id="3_wlu8x"]
+[ext_resource type="Script" path="res://ScrollDown.cs" id="4_of5mr"]
 [ext_resource type="PackedScene" uid="uid://bi4em4tvqyrgb" path="res://screen.blend" id="6_1o5mr"]
+[ext_resource type="Resource" uid="uid://crjowbsbc8mn1" path="res://Commands/BogosCommand.tres" id="7_i0mru"]
 [ext_resource type="PackedScene" uid="uid://dwk3d7kknqb2d" path="res://server.blend" id="7_nusjb"]
+[ext_resource type="Script" path="res://MeshInstance3D.cs" id="8_5phfx"]
+[ext_resource type="Resource" uid="uid://cjs80miejktpx" path="res://Commands/DoorCommand.tres" id="8_tbh1f"]
+[ext_resource type="Resource" uid="uid://canstg70n2b2k" path="res://Commands/HelpCommand.tres" id="9_ujrwy"]
+
+[sub_resource type="Environment" id="Environment_anmup"]
+background_mode = 1
+background_color = Color(0.0588235, 0.0588235, 0.121569, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_h7ayg"]
 viewport_path = NodePath("TerminalViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vgdhl"]
+viewport_path = NodePath("Server Room/SubViewport")
+
+[sub_resource type="BoxMesh" id="BoxMesh_hccyv"]
 
 [node name="Main" type="Node3D"]
 
@@ -20,19 +34,24 @@ camPos = NodePath("CamPos1")
 moveDuration = 1.0
 
 [node name="Camera3D" type="Camera3D" parent="CamHolder"]
+environment = SubResource("Environment_anmup")
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CamHolder/Camera3D"]
 
 [node name="CamPos1" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Left", "Up")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.723993)
 script = ExtResource("1_6cqrj")
 Left = NodePath("../CamPos3")
 Up = NodePath("../CamPos2")
 
 [node name="CamPos3" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Right")]
-transform = Transform3D(0.573105, 0, 0.819482, 0, 1, 0, -0.819482, 0, 0.573105, -0.623004, -1.19209e-07, 0.644943)
+transform = Transform3D(0.297975, -0.245774, 0.922392, 0, 0.966286, 0.25747, -0.954574, -0.0767196, 0.287929, -0.887289, 0.409646, 0.562445)
 script = ExtResource("1_6cqrj")
 Right = NodePath("../CamPos1")
 
 [node name="CamPos2" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Down")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.670922, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.990356, -0.413579)
 script = ExtResource("1_6cqrj")
 Down = NodePath("../CamPos1")
 
@@ -57,16 +76,28 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TerminalViewport/Node3D" node_paths=PackedStringArray("input")]
+[node name="MarginContainer" type="MarginContainer" parent="TerminalViewport/Node3D"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TerminalViewport/Node3D/MarginContainer"]
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+script = ExtResource("4_of5mr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer" node_paths=PackedStringArray("input")]
+custom_minimum_size = Vector2(1080, 370)
+layout_mode = 2
 script = ExtResource("3_nfy56")
 textPrefab = ExtResource("3_wlu8x")
-input = NodePath("../../../InputWindow/Control/LineEdit")
+input = NodePath("../../../../../InputWindow/Control/LineEdit")
+commandList = Array[Resource]([ExtResource("7_i0mru"), ExtResource("8_tbh1f"), ExtResource("9_ujrwy")])
 
 [node name="InputWindow" type="Window" parent="."]
 disable_3d = true
@@ -96,11 +127,14 @@ theme = ExtResource("1_p8cg3")
 caret_blink = true
 
 [node name="screen" parent="." instance=ExtResource("6_1o5mr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19928, -0.151295, -1.96038)
 
 [node name="Sprite3D" type="Sprite3D" parent="screen"]
-transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, -0.143253, -0.670443)
+transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0.00751313, 0.0968934, -1.40119)
 texture = SubResource("ViewportTexture_h7ayg")
+
+[node name="Sprite3D2" type="Sprite3D" parent="screen"]
+transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.0126098, 1.11297, -1.40119)
+texture = SubResource("ViewportTexture_vgdhl")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149956, 1.31282, 2.03489)
@@ -108,6 +142,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149956, 1.31282, 2.03489)
 [node name="Server Room" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 16)
 
-[node name="server" parent="Server Room" instance=ExtResource("7_nusjb")]
+[node name="server2" parent="Server Room" instance=ExtResource("7_nusjb")]
 
-[connection signal="text_submitted" from="InputWindow/Control/LineEdit" to="TerminalViewport/Node3D/VBoxContainer" method="_on_line_edit_text_submitted"]
+[node name="SubViewport" type="SubViewport" parent="Server Room"]
+
+[node name="Camera3D" type="Camera3D" parent="Server Room/SubViewport"]
+transform = Transform3D(0.73373, -0.360049, 0.576199, 0, 0.848048, 0.529919, -0.679441, -0.388818, 0.622238, -11.288, 4.37, 20.886)
+fov = 70.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Server Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.71052, 0.729736, 0.158356)
+mesh = SubResource("BoxMesh_hccyv")
+script = ExtResource("8_5phfx")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Server Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.37581, 7.43146, 3.86826)
+light_color = Color(1, 0.768627, 0.768627, 1)
+light_energy = 3.263
+omni_range = 15.4081
+
+[connection signal="text_submitted" from="InputWindow/Control/LineEdit" to="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_submitted"]
