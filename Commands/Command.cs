@@ -2,10 +2,10 @@
 
 namespace Screen.Commands;
 
-public abstract partial class Command : Resource
+public abstract partial class Command : Node
 {
-    [Export] public string Name;
     [Export] public string Description;
+    [Export] public int PowerCost;
     protected Console Con { get; private set; }
     public void Init(Console c)
     {

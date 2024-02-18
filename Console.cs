@@ -9,14 +9,15 @@ public partial class Console : VBoxContainer
 {
     [Export] private PackedScene textPrefab;
     [Export] private LineEdit input;
-    [Export] public Command[] commandList;
+    public readonly List<Command> CommandList = new ();
 
     public override void _Ready()
     {
-        foreach (Command c in commandList)
-        {
+        foreach (Node n in GetChildren())
+            if (n is Command c) CommandList.Add(c);
+        
+        foreach (Command c in CommandList)
             c.Init(this);
-        }
     }
     
     public void _on_line_edit_text_submitted(string text)
@@ -24,7 +25,7 @@ public partial class Console : VBoxContainer
         if(text == "") return;
         string[] args = text.ToLower().Split(" ");
         bool found = false;
-        foreach (Command c in commandList)
+        foreach (Command c in CommandList)
         {
             if (args[0] == c.Name)
             {

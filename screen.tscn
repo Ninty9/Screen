@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://crsjatqh2jcg"]
+
+[ext_resource type="PackedScene" uid="uid://bi4em4tvqyrgb" path="res://Models/screen.blend" id="1_0khh2"]
+[ext_resource type="Script" path="res://Lever.cs" id="2_8qo0s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_thdfn"]
+size = Vector3(0.25415, 0.25, 1.50244)
+
+[node name="screen" instance=ExtResource("1_0khh2")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_001" index="0"]
+transform = Transform3D(1, -5.96046e-08, -8.9407e-08, 0, 0.707107, -0.707107, 8.9407e-08, 0.707107, 0.707107, 0.848759, 0.0659596, 0.147381)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_001/StaticBody3D" index="0"]
+transform = Transform3D(0.999993, 1.63913e-07, 1.93715e-07, 0, 1, -2.6077e-08, 0, -1.11759e-08, 1, -0.00720167, -5.96046e-07, -0.0607916)
+shape = SubResource("BoxShape3D_thdfn")
+
+[node name="Lever" parent="Cube_001" index="1"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0.848759, 0.0579153, 0.155425)
+script = ExtResource("2_8qo0s")
+upSpeed = 0.5
+downDuration = 1.0
+upEase = 1
+
+[node name="Up" type="Node3D" parent="Cube_001" index="2"]
+transform = Transform3D(1, 1.49012e-08, -1.49012e-08, 3.16101e-08, 0.707107, -0.707107, 2.98023e-08, 0.707107, 0.707107, 0.848759, 0.588245, -0.374905)
+
+[node name="Down" type="Node3D" parent="Cube_001" index="3"]
+transform = Transform3D(1, 4.47035e-08, -1.49012e-08, 7.3757e-08, 0.707107, -0.707107, 2.98023e-08, 0.707107, 0.707107, 0.849759, -0.364935, 0.581104)
+
+[connection signal="mouse_entered" from="Cube_001/StaticBody3D" to="Cube_001/Lever" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Cube_001/StaticBody3D" to="Cube_001/Lever" method="_on_mouse_exited"]

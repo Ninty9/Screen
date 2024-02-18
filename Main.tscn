@@ -6,21 +6,21 @@
 [ext_resource type="Script" path="res://Console.cs" id="3_nfy56"]
 [ext_resource type="PackedScene" uid="uid://dw8j5llrt630x" path="res://rich_text_label.tscn" id="3_wlu8x"]
 [ext_resource type="Script" path="res://ScrollDown.cs" id="4_of5mr"]
-[ext_resource type="PackedScene" uid="uid://bi4em4tvqyrgb" path="res://screen.blend" id="6_1o5mr"]
-[ext_resource type="Resource" uid="uid://crjowbsbc8mn1" path="res://Commands/BogosCommand.tres" id="7_i0mru"]
-[ext_resource type="PackedScene" uid="uid://dwk3d7kknqb2d" path="res://server.blend" id="7_nusjb"]
+[ext_resource type="Script" path="res://Commands/BogosCommand.cs" id="7_6f3l2"]
+[ext_resource type="PackedScene" uid="uid://dwk3d7kknqb2d" path="res://Models/server.blend" id="7_nusjb"]
 [ext_resource type="Script" path="res://MeshInstance3D.cs" id="8_5phfx"]
-[ext_resource type="Resource" uid="uid://cjs80miejktpx" path="res://Commands/DoorCommand.tres" id="8_tbh1f"]
-[ext_resource type="Resource" uid="uid://canstg70n2b2k" path="res://Commands/HelpCommand.tres" id="9_ujrwy"]
+[ext_resource type="Script" path="res://Commands/DoorCommand.cs" id="8_ss1e6"]
+[ext_resource type="Script" path="res://Commands/HelpCommand.cs" id="9_kryt3"]
+[ext_resource type="PackedScene" uid="uid://crsjatqh2jcg" path="res://screen.tscn" id="10_blxdg"]
 
 [sub_resource type="Environment" id="Environment_anmup"]
 background_mode = 1
 background_color = Color(0.0588235, 0.0588235, 0.121569, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_h7ayg"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_j31vm"]
 viewport_path = NodePath("TerminalViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vgdhl"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xytnn"]
 viewport_path = NodePath("Server Room/SubViewport")
 
 [sub_resource type="BoxMesh" id="BoxMesh_hccyv"]
@@ -97,7 +97,18 @@ layout_mode = 2
 script = ExtResource("3_nfy56")
 textPrefab = ExtResource("3_wlu8x")
 input = NodePath("../../../../../InputWindow/Control/LineEdit")
-commandList = Array[Resource]([ExtResource("7_i0mru"), ExtResource("8_tbh1f"), ExtResource("9_ujrwy")])
+
+[node name="bint" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
+script = ExtResource("7_6f3l2")
+Description = "Will bint whatever, idfk."
+
+[node name="door" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
+script = ExtResource("8_ss1e6")
+Description = "open/close a door.|Usage: door [open/close] [door code]"
+
+[node name="help" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
+script = ExtResource("9_kryt3")
+Description = "Shows every command and its description."
 
 [node name="InputWindow" type="Window" parent="."]
 disable_3d = true
@@ -126,15 +137,17 @@ grow_vertical = 2
 theme = ExtResource("1_p8cg3")
 caret_blink = true
 
-[node name="screen" parent="." instance=ExtResource("6_1o5mr")]
+[node name="screen" parent="." instance=ExtResource("10_blxdg")]
 
 [node name="Sprite3D" type="Sprite3D" parent="screen"]
-transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0.00751313, 0.0968934, -1.40119)
-texture = SubResource("ViewportTexture_h7ayg")
+transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, 0.101599, -1.39635)
+top_level = true
+texture = SubResource("ViewportTexture_j31vm")
 
 [node name="Sprite3D2" type="Sprite3D" parent="screen"]
-transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.0126098, 1.11297, -1.40119)
-texture = SubResource("ViewportTexture_vgdhl")
+transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.0125065, 1.11423, -1.40745)
+top_level = true
+texture = SubResource("ViewportTexture_xytnn")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149956, 1.31282, 2.03489)
@@ -148,6 +161,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 16)
 
 [node name="Camera3D" type="Camera3D" parent="Server Room/SubViewport"]
 transform = Transform3D(0.73373, -0.360049, 0.576199, 0, 0.848048, 0.529919, -0.679441, -0.388818, 0.622238, -11.288, 4.37, 20.886)
+current = true
 fov = 70.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Server Room"]
