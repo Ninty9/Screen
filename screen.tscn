@@ -19,7 +19,7 @@ shape = SubResource("BoxShape3D_thdfn")
 transform = Transform3D(1, 0, -2.98023e-08, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0.848759, 0.0579153, 0.155425)
 script = ExtResource("2_8qo0s")
 upSpeed = 0.5
-downDuration = 1.0
+downSpeed = 0.85
 upEase = 1
 
 [node name="Up" type="Node3D" parent="Cube_001" index="2"]

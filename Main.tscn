@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dy2c6845m3gxx"]
+[gd_scene load_steps=23 format=3 uid="uid://dy2c6845m3gxx"]
 
 [ext_resource type="Script" path="res://CamPos.cs" id="1_6cqrj"]
 [ext_resource type="Theme" uid="uid://ct57t5xfmm2w6" path="res://CsText.tres" id="1_p8cg3"]
@@ -12,16 +12,35 @@
 [ext_resource type="Script" path="res://Commands/DoorCommand.cs" id="8_ss1e6"]
 [ext_resource type="Script" path="res://Commands/HelpCommand.cs" id="9_kryt3"]
 [ext_resource type="PackedScene" uid="uid://crsjatqh2jcg" path="res://screen.tscn" id="10_blxdg"]
+[ext_resource type="PackedScene" uid="uid://dfb8pk3kr7kff" path="res://Models/reactor.blend" id="11_gvh0r"]
+[ext_resource type="Script" path="res://EnergyLabel.cs" id="11_k7yyp"]
+[ext_resource type="Script" path="res://Reactor.cs" id="12_5j06u"]
+[ext_resource type="Script" path="res://MatchReactor.cs" id="12_mc0wx"]
 
 [sub_resource type="Environment" id="Environment_anmup"]
 background_mode = 1
 background_color = Color(0.0588235, 0.0588235, 0.121569, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.2514
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_j31vm"]
 viewport_path = NodePath("TerminalViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xytnn"]
 viewport_path = NodePath("Server Room/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k1tqg"]
+viewport_path = NodePath("reactor/SubViewport")
+
+[sub_resource type="Environment" id="Environment_sxn7t"]
+background_mode = 1
+background_color = Color(0, 0.282353, 1, 1)
+background_energy_multiplier = 4.35
+ambient_light_source = 1
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.24
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.3018
 
 [sub_resource type="BoxMesh" id="BoxMesh_hccyv"]
 
@@ -31,28 +50,32 @@ viewport_path = NodePath("Server Room/SubViewport")
 script = ExtResource("1_xe4c0")
 camera = NodePath("Camera3D")
 camPos = NodePath("CamPos1")
-moveDuration = 1.0
+moveDuration = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="CamHolder"]
+cull_mask = 1047553
 environment = SubResource("Environment_anmup")
 current = true
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CamHolder/Camera3D"]
+light_volumetric_fog_energy = 0.0
 
 [node name="CamPos1" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Left", "Up")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.723993)
+transform = Transform3D(1, 0, 0, 0, 0.920682, 0.390313, 0, -0.390313, 0.920682, 0, 0.198789, -0.642755)
 script = ExtResource("1_6cqrj")
 Left = NodePath("../CamPos3")
 Up = NodePath("../CamPos2")
 
-[node name="CamPos3" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Right")]
-transform = Transform3D(0.297975, -0.245774, 0.922392, 0, 0.966286, 0.25747, -0.954574, -0.0767196, 0.287929, -0.887289, 0.409646, 0.562445)
+[node name="CamPos3" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Right", "Up")]
+transform = Transform3D(0.322266, -0.497437, 0.80542, 0, 0.850811, 0.525472, -0.946649, -0.169341, 0.274187, -0.824165, 0.729495, 0.68929)
 script = ExtResource("1_6cqrj")
 Right = NodePath("../CamPos1")
+Up = NodePath("../CamPos2")
 
-[node name="CamPos2" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Down")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.990356, -0.413579)
+[node name="CamPos2" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Left", "Down")]
+transform = Transform3D(1, 0, 0, 0, 0.982603, -0.185718, 0, 0.185718, 0.982603, 0, 0.675631, -0.791176)
 script = ExtResource("1_6cqrj")
+Left = NodePath("../CamPos3")
 Down = NodePath("../CamPos1")
 
 [node name="TerminalViewport" type="SubViewport" parent="."]
@@ -101,10 +124,12 @@ input = NodePath("../../../../../InputWindow/Control/LineEdit")
 [node name="bint" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
 script = ExtResource("7_6f3l2")
 Description = "Will bint whatever, idfk."
+PowerCost = 1
 
 [node name="door" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
 script = ExtResource("8_ss1e6")
 Description = "open/close a door.|Usage: door [open/close] [door code]"
+PowerCost = 2
 
 [node name="help" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
 script = ExtResource("9_kryt3")
@@ -149,8 +174,70 @@ transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.0125065, 1.114
 top_level = true
 texture = SubResource("ViewportTexture_xytnn")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="screen"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149956, 1.31282, 2.03489)
+light_volumetric_fog_energy = 0.0
+
+[node name="Sprite3D3" type="Sprite3D" parent="screen"]
+transform = Transform3D(0.093457, -0.18932, 0.198806, 0, 0.21001, 0.19999, -0.274528, -0.0644498, 0.067679, -2.1704, 0.114596, 0.377219)
+texture = SubResource("ViewportTexture_k1tqg")
+
+[node name="Label3D" type="Label3D" parent="screen/Sprite3D3"]
+transform = Transform3D(1, -1.49012e-08, 1.49012e-08, 0, 1, -7.45058e-09, 0, -1.11759e-08, 1, 2.29799, 2.77427, 9.53674e-07)
+text = "23%"
+script = ExtResource("11_k7yyp")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="screen/Sprite3D3"]
+transform = Transform3D(1, 3.45707e-08, -5.1856e-08, -3.45707e-08, 1, 3.8892e-08, 5.1856e-08, -3.8892e-08, 1, 4.76837e-07, -4.76837e-07, 0.0912209)
+light_color = Color(0, 0.666667, 1, 1)
+light_energy = 0.0
+light_volumetric_fog_energy = 0.1
+shadow_enabled = true
+omni_range = 8.57093
+script = ExtResource("12_mc0wx")
+
+[node name="reactor" parent="." instance=ExtResource("11_gvh0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 5)
+
+[node name="SubViewport" type="SubViewport" parent="reactor"]
+
+[node name="Camera3D" type="Camera3D" parent="reactor/SubViewport"]
+transform = Transform3D(0.964557, 0.0700731, -0.254399, 0, 0.964095, 0.265556, 0.263873, -0.256144, 0.929925, 17.896, 1.94626, 12.7601)
+environment = SubResource("Environment_sxn7t")
+current = true
+fov = 70.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="reactor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -6.27563, 0)
+light_color = Color(0, 0.666667, 1, 1)
+light_energy = 0.0
+light_indirect_energy = 16.0
+light_volumetric_fog_energy = 3.0
+shadow_enabled = true
+spot_range = 17.475
+spot_angle = 27.2608
+script = ExtResource("12_5j06u")
+gainPerSecond = 0.75
+
+[node name="OmniLight3D" type="OmniLight3D" parent="reactor/SpotLight3D"]
+transform = Transform3D(1, 3.45707e-08, -5.1856e-08, -3.45707e-08, 1, 3.8892e-08, 5.1856e-08, -3.8892e-08, 1, 0, -1.43051e-06, -6.40477)
+light_color = Color(0, 0.666667, 1, 1)
+light_energy = 0.0
+light_volumetric_fog_energy = 0.5
+shadow_enabled = true
+omni_range = 9.72085
+script = ExtResource("12_mc0wx")
+
+[node name="OmniLight3D" type="SpotLight3D" parent="reactor"]
+transform = Transform3D(0.998871, 0.0182208, 0.0438778, -0.0470359, 0.249019, 0.967356, 0.00669963, -0.968327, 0.249594, 0.46393, 7.91723, 3.64606)
+light_color = Color(1, 0.65098, 0.65098, 1)
+light_energy = 2.902
+light_volumetric_fog_energy = 1.335
+shadow_enabled = true
+distance_fade_begin = 8.0
+distance_fade_length = 1.0
+spot_range = 12.3287
+spot_angle = 31.8396
 
 [node name="Server Room" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 16)
@@ -171,6 +258,7 @@ script = ExtResource("8_5phfx")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Server Room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.37581, 7.43146, 3.86826)
+layers = 2
 light_color = Color(1, 0.768627, 0.768627, 1)
 light_energy = 3.263
 omni_range = 15.4081

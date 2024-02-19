@@ -40,9 +40,9 @@ public partial class CamManager : Node3D
             return;
         camPos = pos;
         Tween tweenPos = GetTree().CreateTween();
-        tweenPos.TweenProperty(camera, "position", camPos.Position, moveDuration);
+        tweenPos.TweenProperty(camera, "position", camPos.Position, moveDuration).SetEase(ease: Tween.EaseType.Out).SetTrans(trans: Tween.TransitionType.Quad);
         Tween tweenRot = GetTree().CreateTween();
-        tweenRot.TweenProperty(camera, "rotation", camPos.Rotation, moveDuration);
+        tweenRot.TweenProperty(camera, "rotation", camPos.Rotation, moveDuration).SetEase(ease: Tween.EaseType.InOut).SetTrans(trans: Tween.TransitionType.Expo);
     }
 
     public override void _Input(InputEvent @event)

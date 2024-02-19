@@ -1,3 +1,6 @@
+using System.Linq;
+using Godot;
+
 namespace Screen.Commands;
 
 public partial class BogosCommand : Command
@@ -10,7 +13,9 @@ public partial class BogosCommand : Command
             Con.Print("bogos binted");
             return;
         }
-        Con.Print(args[1] + " binted" + (args[1] == "bogos" ? "!" : "" ));
+
+        string s = args.Skip(1).ToArray().Join(" ");
+        Con.Print(s + " binted" + (s == "bogos" ? "!" : "" ));
     }
 
 

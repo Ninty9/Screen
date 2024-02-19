@@ -1,10 +1,11 @@
 using Godot;
-using System;
+
+namespace Screen;
 
 public partial class Lever : Node3D
 {
     [Export] private float upSpeed;
-    [Export] private float downDuration;
+    [Export] private float downSpeed;
     [Export] private Tween.EaseType upEase;
     [Export] private Tween.EaseType downEase;
     private Node3D up;
@@ -21,31 +22,42 @@ public partial class Lever : Node3D
 
     public void _on_mouse_entered()
     {
-        tween = GetTree().CreateTween();
-        tween.SetEase(downEase);
-        tween.TweenProperty(this, "position", down.Position, downDuration);
         held = true;
-        GD.Print("start");
     }
     
     public void _on_mouse_exited()
     {
         held = false;
-        tween.Stop();
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if(held) return;
-        float speed = upSpeed * (float)delta;
-        
-        if (Position.DistanceTo(up.Position) > speed)
-            Position += (up.Position - Position).Normalized() * upSpeed * (float)delta;
-        else if(Position.DistanceTo(up.Position) != 0)
+        if(held)
         {
-            Position = up.Position;
-            GD.Print("stop");
+            float speed = downSpeed * (float)delta;
+        
+            if (Position.DistanceTo(down.Position) > speed)
+                Position += (down.Position - Position).Normalized() * upSpeed * (float)delta;
+            else if(Position.DistanceTo(down.Position) != 0)
+                Position = down.Position;
+
+            if (Position.DistanceTo(down.Position) < down.Position.DistanceTo(up.Position)/2)
+                Reactor.SetReactor(true);
         }
+        else
+        {
+            float speed = upSpeed * (float)delta;
+        
+            if (Position.DistanceTo(up.Position) > speed)
+                Position += (up.Position - Position).Normalized() * upSpeed * (float)delta;
+            else if(Position.DistanceTo(up.Position) != 0)
+            {
+                Position = up.Position;
+                Reactor.SetReactor(false);
+            }
+
+        }
+        
     }
 
     private void StopGen()

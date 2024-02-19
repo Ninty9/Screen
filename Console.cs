@@ -30,6 +30,7 @@ public partial class Console : VBoxContainer
             if (args[0] == c.Name)
             {
                 c.Run(args);
+                Reactor.Energy -= c.PowerCost;
                 found = true;
             }
         }
