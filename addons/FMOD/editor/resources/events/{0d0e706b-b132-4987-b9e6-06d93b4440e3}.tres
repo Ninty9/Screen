@@ -1,0 +1,29 @@
+[gd_resource type="EventAsset" load_steps=4 format=3 uid="uid://cf42pyvopdv1t"]
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_ixkhv"]
+data1 = 1178955826
+data2 = 79055097
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_eycr0"]
+name = "on"
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_ixkhv")
+maximum = 1.0
+flags = 8
+guid = "{8bb73ae9-9458-41b2-8d3a-9f75af865b66}"
+
+[sub_resource type="ParameterAsset" id="ParameterAsset_i5g74"]
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_eycr0")
+path = "parameter:/on"
+guid = "{8bb73ae9-9458-41b2-8d3a-9f75af865b66}"
+name = "on"
+
+[resource]
+is_3d = true
+min_distance = 1.0
+max_distance = 70.0
+parameters = {
+"{8bb73ae9-9458-41b2-8d3a-9f75af865b66}": SubResource("ParameterAsset_i5g74")
+}
+path = "event:/Reactor"
+guid = "{0d0e706b-b132-4987-b9e6-06d93b4440e3}"
+name = "Reactor"

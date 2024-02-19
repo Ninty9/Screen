@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://elwi418dyljk"
+path="res://.godot/imported/Freeze 5-Tree Tone - Feedback [2024-02-19 022845].wav-12fe2084224989d03d23487c4c0c51cd.sample"
+
+[deps]
+
+source_file="res://Audio/Screen Project/Samples/Processed/Freeze/Freeze 5-Tree Tone - Feedback [2024-02-19 022845].wav"
+dest_files=["res://.godot/imported/Freeze 5-Tree Tone - Feedback [2024-02-19 022845].wav-12fe2084224989d03d23487c4c0c51cd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

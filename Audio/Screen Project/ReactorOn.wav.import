@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://brajk86jkooja"
+path="res://.godot/imported/ReactorOn.wav-7de5903ae409d6ff84088000e5cf2c45.sample"
+
+[deps]
+
+source_file="res://Audio/Screen Project/ReactorOn.wav"
+dest_files=["res://.godot/imported/ReactorOn.wav-7de5903ae409d6ff84088000e5cf2c45.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

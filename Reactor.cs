@@ -8,6 +8,7 @@ public partial class Reactor : SpotLight3D
     [Export] private float gainPerSecond;
     private double secCount;
     private static bool reacting;
+    [Export] private Node sound;
     public static Reactor React { get; private set; }
 
     public override void _Ready()
@@ -27,7 +28,9 @@ public partial class Reactor : SpotLight3D
 
     private void LightsOn()
     {
+        sound.Call("set", "parameter_on", 1);
         Tween tween = GetTree().CreateTween();
+        tween.TweenInterval(0.25f);
         tween.TweenProperty(this, "light_energy", 16, 0.2f);
         tween.TweenProperty(this, "light_energy", 0, 0);
         tween.TweenProperty(this, "light_energy", 32, 1f);
@@ -35,7 +38,9 @@ public partial class Reactor : SpotLight3D
     
     private void LightsOff()
     {
+        sound.Call("set", "parameter_on", 0);
         Tween tween = GetTree().CreateTween();
+        tween.TweenInterval(0.25f);
         tween.TweenProperty(this, "light_energy", 16, 0.2f);
         tween.TweenProperty(this, "light_energy", 32, 0);
         tween.TweenInterval(0.2f);

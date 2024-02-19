@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://x4k3mggropir"
+path="res://.godot/imported/Freeze 6-Swing [2024-02-19 022707].wav-5bb7b15496242715a366410b557368ae.sample"
+
+[deps]
+
+source_file="res://Audio/Screen Project/Samples/Processed/Freeze/Freeze 6-Swing [2024-02-19 022707].wav"
+dest_files=["res://.godot/imported/Freeze 6-Swing [2024-02-19 022707].wav-5bb7b15496242715a366410b557368ae.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

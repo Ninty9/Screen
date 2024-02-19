@@ -18,6 +18,9 @@ public partial class Console : VBoxContainer
         
         foreach (Command c in CommandList)
             c.Init(this);
+        
+        Print("SecurOS V1.6.2");
+        Print("Remember to read the manual.");
     }
     
     public void _on_line_edit_text_submitted(string text)

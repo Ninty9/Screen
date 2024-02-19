@@ -8,6 +8,7 @@ public partial class CamManager : Node3D
     [Export] private CamPos camPos;
     [Export] private float moveDuration;
     private Vector2 position;
+    private Dirs? moving;
 
     public override void _Ready()
     {
@@ -17,6 +18,8 @@ public partial class CamManager : Node3D
 
     private void CamSwitch(Dirs dir)
     {
+        if(dir == moving) return;
+        moving = dir;
         switch (dir)
         {
             case Dirs.Up:
@@ -41,8 +44,14 @@ public partial class CamManager : Node3D
         camPos = pos;
         Tween tweenPos = GetTree().CreateTween();
         tweenPos.TweenProperty(camera, "position", camPos.Position, moveDuration).SetEase(ease: Tween.EaseType.Out).SetTrans(trans: Tween.TransitionType.Quad);
+        tweenPos.TweenCallback(Callable.From(ResetMove));
         Tween tweenRot = GetTree().CreateTween();
         tweenRot.TweenProperty(camera, "rotation", camPos.Rotation, moveDuration).SetEase(ease: Tween.EaseType.InOut).SetTrans(trans: Tween.TransitionType.Expo);
+    }
+
+    private void ResetMove()
+    {
+        moving = null;
     }
 
     public override void _Input(InputEvent @event)
