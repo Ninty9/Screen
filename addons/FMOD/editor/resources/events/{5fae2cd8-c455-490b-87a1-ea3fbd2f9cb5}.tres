@@ -1,0 +1,10 @@
+[gd_resource type="EventAsset" format=3 uid="uid://dgae5sys4bicj"]
+
+[resource]
+is_3d = true
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Key"
+guid = "{5fae2cd8-c455-490b-87a1-ea3fbd2f9cb5}"
+name = "Key"

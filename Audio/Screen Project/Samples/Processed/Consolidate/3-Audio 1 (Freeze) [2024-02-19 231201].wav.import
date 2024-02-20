@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ctigga28o8er4"
+path="res://.godot/imported/3-Audio 1 (Freeze) [2024-02-19 231201].wav-a692c8f7a3334de0490fb222396b4bfd.sample"
+
+[deps]
+
+source_file="res://Audio/Screen Project/Samples/Processed/Consolidate/3-Audio 1 (Freeze) [2024-02-19 231201].wav"
+dest_files=["res://.godot/imported/3-Audio 1 (Freeze) [2024-02-19 231201].wav-a692c8f7a3334de0490fb222396b4bfd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

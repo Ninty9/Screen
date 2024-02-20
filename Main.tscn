@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dy2c6845m3gxx"]
+[gd_scene load_steps=28 format=3 uid="uid://dy2c6845m3gxx"]
 
 [ext_resource type="Script" path="res://CamPos.cs" id="1_6cqrj"]
 [ext_resource type="Theme" uid="uid://ct57t5xfmm2w6" path="res://CsText.tres" id="1_p8cg3"]
@@ -27,6 +27,15 @@ background_color = Color(0.0588235, 0.0588235, 0.121569, 1)
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.2514
 
+[sub_resource type="EventAsset" id="EventAsset_unha6"]
+is_3d = true
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Key"
+guid = "{5fae2cd8-c455-490b-87a1-ea3fbd2f9cb5}"
+name = "Key"
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_j31vm"]
 viewport_path = NodePath("TerminalViewport")
 
@@ -39,12 +48,11 @@ viewport_path = NodePath("reactor/SubViewport")
 [sub_resource type="BoxMesh" id="BoxMesh_hccyv"]
 
 [sub_resource type="Environment" id="Environment_sxn7t"]
-background_mode = 1
 background_color = Color(0, 0.282353, 1, 1)
-background_energy_multiplier = 4.35
+background_energy_multiplier = 0.0
 ambient_light_source = 1
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.24
+ambient_light_energy = 9.7
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.3018
 
@@ -154,6 +162,10 @@ PowerCost = 2
 [node name="help" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
 script = ExtResource("9_kryt3")
 Description = "Shows every command and its description."
+
+[node name="Sound" type="StudioEventEmitter3D" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
+event = SubResource("EventAsset_unha6")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248384, -0.984532)
 
 [node name="InputWindow" type="Window" parent="."]
 disable_3d = true
@@ -303,4 +315,5 @@ bank_0 = ExtResource("18_mofi2")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sxn7t")
 
+[connection signal="text_changed" from="InputWindow/Control/LineEdit" to="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer" method="_on_text_changed"]
 [connection signal="text_submitted" from="InputWindow/Control/LineEdit" to="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_submitted"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvmwxpa150nbt"
+path="res://.godot/imported/3-Audio 1 (Freeze) [2024-02-19 231144].wav-6b8beadb661f208dc7a5ab03e3cd7296.sample"
+
+[deps]
+
+source_file="res://Audio/Screen Project/Samples/Processed/Consolidate/3-Audio 1 (Freeze) [2024-02-19 231144].wav"
+dest_files=["res://.godot/imported/3-Audio 1 (Freeze) [2024-02-19 231144].wav-6b8beadb661f208dc7a5ab03e3cd7296.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

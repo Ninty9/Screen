@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dw8j5llrt630x"]
+[gd_scene load_steps=4 format=3 uid="uid://dw8j5llrt630x"]
 
 [ext_resource type="Theme" uid="uid://ct57t5xfmm2w6" path="res://CsText.tres" id="1_4psgs"]
 [ext_resource type="Script" path="res://RevealText.cs" id="2_hbgcl"]
+
+[sub_resource type="EventAsset" id="EventAsset_lj2ep"]
+is_3d = true
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Term"
+guid = "{6df2a9bb-d59d-4fde-8b93-0ee21d521e64}"
+name = "Term"
 
 [node name="RichTextLabel" type="RichTextLabel"]
 custom_minimum_size = Vector2(100, 0)
@@ -14,6 +23,12 @@ theme = ExtResource("1_4psgs")
 text = "ababa"
 fit_content = true
 drag_and_drop_selection_enabled = false
+visible_characters = 0
 visible_characters_behavior = 1
+visible_ratio = 0.0
 script = ExtResource("2_hbgcl")
-revealSpeed = 3.0
+revealSpeed = 0.025
+
+[node name="Sound" type="StudioEventEmitter3D" parent="."]
+event = SubResource("EventAsset_lj2ep")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.095, -1.396)

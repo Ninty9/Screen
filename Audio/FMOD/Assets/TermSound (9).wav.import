@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c477suuxyeeh2"
+path="res://.godot/imported/TermSound (9).wav-016906394fa09574ccb577f75565cf3a.sample"
+
+[deps]
+
+source_file="res://Audio/FMOD/Assets/TermSound (9).wav"
+dest_files=["res://.godot/imported/TermSound (9).wav-016906394fa09574ccb577f75565cf3a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

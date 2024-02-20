@@ -10,9 +10,11 @@ public partial class Console : VBoxContainer
     [Export] private PackedScene textPrefab;
     [Export] private LineEdit input;
     public readonly List<Command> CommandList = new ();
+    private Node sound;
 
     public override void _Ready()
     {
+        sound = FindChild("Sound");
         foreach (Node n in GetChildren())
             if (n is Command c) CommandList.Add(c);
         
@@ -21,6 +23,13 @@ public partial class Console : VBoxContainer
         
         Print("SecurOS V1.6.2");
         Print("Remember to read the manual.");
+    }
+
+    public void _on_text_changed(string _)
+    {
+        sound.Call("stop");
+        sound.Call("play");
+        GD.Print("test");
     }
     
     public void _on_line_edit_text_submitted(string text)

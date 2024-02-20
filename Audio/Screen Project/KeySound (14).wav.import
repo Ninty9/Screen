@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3j5o5a3705u0"
+path="res://.godot/imported/KeySound (14).wav-4be7d40c016713a6373bfcfb4847e390.sample"
+
+[deps]
+
+source_file="res://Audio/Screen Project/KeySound (14).wav"
+dest_files=["res://.godot/imported/KeySound (14).wav-4be7d40c016713a6373bfcfb4847e390.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

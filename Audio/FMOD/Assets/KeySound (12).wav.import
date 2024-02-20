@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://connss6wp4utx"
+path="res://.godot/imported/KeySound (12).wav-b441a7ccfc05ed3cb62629e5b1b8ce99.sample"
+
+[deps]
+
+source_file="res://Audio/FMOD/Assets/KeySound (12).wav"
+dest_files=["res://.godot/imported/KeySound (12).wav-b441a7ccfc05ed3cb62629e5b1b8ce99.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

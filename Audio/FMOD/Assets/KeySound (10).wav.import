@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://0ivk25x7nbep"
+path="res://.godot/imported/KeySound (10).wav-d19e9578951a80f17f4c556c8d29e82c.sample"
+
+[deps]
+
+source_file="res://Audio/FMOD/Assets/KeySound (10).wav"
+dest_files=["res://.godot/imported/KeySound (10).wav-d19e9578951a80f17f4c556c8d29e82c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

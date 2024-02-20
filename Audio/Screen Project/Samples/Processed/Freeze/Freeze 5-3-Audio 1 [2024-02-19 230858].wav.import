@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cikqmtxecqsai"
+path="res://.godot/imported/Freeze 5-3-Audio 1 [2024-02-19 230858].wav-98781dacfd64a9c6bed979c34a914b9f.sample"
+
+[deps]
+
+source_file="res://Audio/Screen Project/Samples/Processed/Freeze/Freeze 5-3-Audio 1 [2024-02-19 230858].wav"
+dest_files=["res://.godot/imported/Freeze 5-3-Audio 1 [2024-02-19 230858].wav-98781dacfd64a9c6bed979c34a914b9f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{59a93224-28c3-418e-85e2-654700ce2899}">
+		<property name="assetPath">
+			<value>TermSound (7).wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.92598639455782317</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b5756654-dcfd-4465-a997-e32fe9e2962d}</destination>
+		</relationship>
+	</object>
+</objects>

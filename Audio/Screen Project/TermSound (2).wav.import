@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c4mx2jd5e6qbn"
+path="res://.godot/imported/TermSound (2).wav-f44835991e05dd35f13a65e7666e5ece.sample"
+
+[deps]
+
+source_file="res://Audio/Screen Project/TermSound (2).wav"
+dest_files=["res://.godot/imported/TermSound (2).wav-f44835991e05dd35f13a65e7666e5ece.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
