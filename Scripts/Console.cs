@@ -29,7 +29,6 @@ public partial class Console : VBoxContainer
     {
         sound.Call("stop");
         sound.Call("play");
-        GD.Print("test");
     }
     
     public void _on_line_edit_text_submitted(string text)

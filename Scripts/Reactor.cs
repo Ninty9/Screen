@@ -7,7 +7,7 @@ public partial class Reactor : SpotLight3D
     public static int Energy;
     [Export] private float gainPerSecond;
     private double secCount;
-    private static bool reacting;
+    public static bool Reacting;
     [Export] private Node sound;
     public static Reactor React { get; private set; }
 
@@ -18,8 +18,8 @@ public partial class Reactor : SpotLight3D
 
     public static void SetReactor(bool on)
     {
-        if(on == reacting) return;
-        reacting = on;
+        if(on == Reacting) return;
+        Reacting = on;
         if (on)
             React.LightsOn();
         else
@@ -53,7 +53,7 @@ public partial class Reactor : SpotLight3D
     public override void _PhysicsProcess(double delta)
     {
         secCount += delta;
-        if (reacting && secCount > 1f / gainPerSecond)
+        if (Reacting && secCount > 1f / gainPerSecond)
         {
             Energy += 1;
             secCount = 0;

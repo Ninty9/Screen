@@ -1,0 +1,117 @@
+[gd_scene load_steps=4 format=3 uid="uid://dws37qrj72mlk"]
+
+[ext_resource type="PackedScene" uid="uid://dlygouj7hpe5n" path="res://Models/room.blend" id="1_1x8jn"]
+[ext_resource type="Script" path="res://Scripts/ToggleVis.cs" id="2_rkf74"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnryn"]
+transparency = 1
+albedo_color = Color(0.431373, 0.431373, 0.431373, 0.917647)
+
+[node name="room" instance=ExtResource("1_1x8jn")]
+
+[node name="Plane_006" parent="." index="6"]
+surface_material_override/1 = SubResource("StandardMaterial3D_wnryn")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.78528, 0)
+light_color = Color(1, 0.709804, 1, 1)
+omni_range = 7.29261
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="8"]
+transform = Transform3D(-0.689177, 0.401289, -0.603326, 0, 0.832641, 0.553813, 0.724593, 0.381675, -0.573837, -7.08094, 4.13203, -3.57244)
+light_energy = 10.063
+light_volumetric_fog_energy = 1.671
+shadow_enabled = true
+spot_range = 14.255
+spot_angle = 17.3371
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.089, 3.96112, 0)
+light_energy = 2.007
+light_volumetric_fog_energy = 0.1
+omni_range = 7.79578
+
+[node name="RoomLazer" parent="." index="18"]
+visible = false
+script = ExtResource("2_rkf74")
+
+[node name="Empty#OmniLight3D" type="OmniLight3D" parent="RoomLazer" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.47809, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.447
+light_indirect_energy = 0.619
+light_volumetric_fog_energy = 0.553
+shadow_enabled = true
+omni_range = 9.071
+
+[node name="Empty#OmniLight3D2" type="OmniLight3D" parent="RoomLazer" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.47809, 1.26845)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.447
+light_indirect_energy = 0.619
+light_volumetric_fog_energy = 0.553
+shadow_enabled = true
+omni_range = 9.071
+
+[node name="Empty#OmniLight3D3" type="OmniLight3D" parent="RoomLazer" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.47809, -0.99877)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.447
+light_indirect_energy = 0.619
+light_volumetric_fog_energy = 0.553
+shadow_enabled = true
+omni_range = 9.071
+
+[node name="Empty#OmniLight3D4" type="OmniLight3D" parent="RoomLazer" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2.21066, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.447
+light_indirect_energy = 0.619
+light_volumetric_fog_energy = 0.553
+shadow_enabled = true
+omni_range = 9.071
+
+[node name="Empty#OmniLight3D5" type="OmniLight3D" parent="RoomLazer" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2.21066, 1.26845)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.447
+light_indirect_energy = 0.619
+light_volumetric_fog_energy = 0.553
+shadow_enabled = true
+omni_range = 9.071
+
+[node name="Empty#OmniLight3D6" type="OmniLight3D" parent="RoomLazer" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2.21066, -0.99877)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.447
+light_indirect_energy = 0.619
+light_volumetric_fog_energy = 0.553
+shadow_enabled = true
+omni_range = 9.071
+
+[node name="Empty#OmniLight3D7" type="OmniLight3D" parent="RoomLazer" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.731438, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.447
+light_indirect_energy = 0.619
+light_volumetric_fog_energy = 0.553
+shadow_enabled = true
+omni_range = 9.071
+
+[node name="Empty#OmniLight3D8" type="OmniLight3D" parent="RoomLazer" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.731438, 1.26845)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.447
+light_indirect_energy = 0.619
+light_volumetric_fog_energy = 0.553
+shadow_enabled = true
+omni_range = 9.071
+
+[node name="Empty#OmniLight3D9" type="OmniLight3D" parent="RoomLazer" index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.731438, -0.99877)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.447
+light_indirect_energy = 0.619
+light_volumetric_fog_energy = 0.553
+shadow_enabled = true
+omni_range = 9.071

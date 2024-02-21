@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://crsjatqh2jcg"]
+[gd_scene load_steps=6 format=3 uid="uid://crsjatqh2jcg"]
 
 [ext_resource type="PackedScene" uid="uid://bi4em4tvqyrgb" path="res://Models/screen.blend" id="1_0khh2"]
-[ext_resource type="Script" path="res://Lever.cs" id="2_8qo0s"]
+[ext_resource type="Script" path="res://Scripts/Lever.cs" id="2_8qo0s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oq8b7"]
 size = Vector3(0.25415, 0.25, 1.50244)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_af2tq"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4u44j"]
+material = SubResource("StandardMaterial3D_af2tq")
 
 [node name="screen" instance=ExtResource("1_0khh2")]
 
@@ -31,6 +37,34 @@ transform = Transform3D(1, 1.49012e-08, 1.49012e-08, 1.05367e-08, 0.707107, -0.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.691875, 0)
 light_color = Color(1, 0, 0, 1)
 light_energy = 0.25
+
+[node name="HallSpot" type="SpotLight3D" parent="." index="17"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 7.17748, 3.81299, 0)
+light_energy = 2.902
+light_volumetric_fog_energy = 0.5
+shadow_enabled = true
+spot_range = 7.77835
+spot_angle = 42.4861
+
+[node name="HallOmni" type="OmniLight3D" parent="." index="18"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 7.17748, 3.81299, 0)
+light_energy = 2.902
+light_volumetric_fog_energy = 0.16
+shadow_enabled = true
+omni_range = 9.39549
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="19"]
+transform = Transform3D(3.3, 0, 0, 0, -1.44248e-07, 3.3, 0, -3.3, -1.44248e-07, 7.86304, 0.846219, 25.229)
+mesh = SubResource("PlaneMesh_4u44j")
+
+[node name="Turret" type="SpotLight3D" parent="." index="20"]
+transform = Transform3D(1, 0, 0, 0, -0.623825, 0.781564, 0, -0.781564, -0.623825, 7.72884, 3.81299, 10.5049)
+light_color = Color(1, 0.14902, 0.14902, 1)
+light_energy = 8.944
+light_volumetric_fog_energy = 0.276
+shadow_enabled = true
+spot_range = 15.4617
+spot_angle = 27.8714
 
 [connection signal="mouse_entered" from="Cube_001/StaticBody3D" to="Cube_001/Lever" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Cube_001/StaticBody3D" to="Cube_001/Lever" method="_on_mouse_exited"]

@@ -21,7 +21,7 @@ public partial class DoorCommand : Command
                 return;
         }
         
-        switch (args[2])
+        switch (args[1])
         {
             case "on":
                 l.On = true;

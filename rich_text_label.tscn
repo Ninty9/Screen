@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dw8j5llrt630x"]
 
 [ext_resource type="Theme" uid="uid://ct57t5xfmm2w6" path="res://CsText.tres" id="1_4psgs"]
-[ext_resource type="Script" path="res://RevealText.cs" id="2_hbgcl"]
+[ext_resource type="Script" path="res://Scripts/RevealText.cs" id="2_hbgcl"]
 
 [sub_resource type="EventAsset" id="EventAsset_lj2ep"]
 is_3d = true

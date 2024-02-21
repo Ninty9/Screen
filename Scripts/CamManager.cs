@@ -8,7 +8,7 @@ public partial class CamManager : Node3D
     [Export] private CamPos camPos;
     [Export] private float moveDuration;
     private Vector2 position;
-    private Dirs? moving;
+    private bool moving;
 
     public override void _Ready()
     {
@@ -18,8 +18,8 @@ public partial class CamManager : Node3D
 
     private void CamSwitch(Dirs dir)
     {
-        if(dir == moving) return;
-        moving = dir;
+        if(moving) return;
+        moving = true;
         switch (dir)
         {
             case Dirs.Up:
@@ -51,7 +51,7 @@ public partial class CamManager : Node3D
 
     private void ResetMove()
     {
-        moving = null;
+        moving = false;
     }
 
     public override void _Input(InputEvent @event)
