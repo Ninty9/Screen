@@ -2,35 +2,36 @@
 
 namespace Screen.Commands;
 
-public partial class DoorCommand : Command
+public partial class TurretCommand : Command
 {
     
     //array of doors
     public override void Run(string[] args)
     {
-        if (args.Length < 3)
-            return;
-        ToggleVis l;
-        switch (args[1])
+        if (!BootCommand.boot)
         {
-            case "r":
-                l = GetNode<ToggleVis>("/root/Main/room/RoomLazer");
-                break;
-            default:
-                Con.Print("Door not found.");
-                return;
+            Con.Print("Enable system first.");
+            return;
         }
+        if (args.Length < 2)
+        {
+            Con.Print("Not enough args: turret [on/off].");
+            return;
+        }
+        ToggleVis hallwayTurret = GetNode<ToggleVis>("/root/Main/screen/Turret");;
         
         switch (args[1])
         {
             case "on":
-                l.On = true;
+                hallwayTurret.On = true;
+                Con.Print("Turret on.");
                 break;
             case "off":
-                l.On = false;
+                hallwayTurret.On = false;
+                Con.Print("Turret off.");
                 break;
             default:
-                Con.Print(args[2] + " not recognised. use 'on'/'off'");
+                Con.Print(args[2] + " not recognised. use 'on' or 'off'");
                 break;
         }
     }

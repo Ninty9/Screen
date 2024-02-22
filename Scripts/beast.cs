@@ -14,7 +14,7 @@ public partial class beast : Node3D
 
     public override void _Ready()
     {
-        Node3D skel = GetChild(0).GetChild<Node3D>(0);
+        Node3D skel = GetChild(1).GetChild<Node3D>(0);
         FR = skel.GetChild<SkeletonIK3D>(1);
         FL = skel.GetChild<SkeletonIK3D>(2);
         BR = skel.GetChild<SkeletonIK3D>(3);

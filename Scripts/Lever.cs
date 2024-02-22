@@ -1,4 +1,5 @@
 using Godot;
+using Screen.Commands;
 
 namespace Screen;
 
@@ -34,8 +35,9 @@ public partial class Lever : Node3D
     {
         if(held)
         {
+                
             float speed = downSpeed * (float)delta;
-        
+            if (Position.DistanceTo(up.Position) > down.Position.DistanceTo(up.Position) / 3f && !BootCommand.boot) return;
             if (Position.DistanceTo(down.Position) > speed)
                 Position += (down.Position - Position).Normalized() * upSpeed * (float)delta;
             else if(Position.DistanceTo(down.Position) != 0)

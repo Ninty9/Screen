@@ -2,22 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Screen.Commands;
 
 namespace Screen.Scripts;
 
 public partial class BeastManager : Node
 {
     [Export] private beast beast;
-    [Export] private double moveInterval = 5;
+    public static double moveInterval = 7;
     private List<BeastPos> posList = new ();
     private double tick;
     private Random rnd;
     private ToggleVis roomLazer;
     private ToggleVis hallwayTurret;
     private int blastCounter;
-    [Export] private Rooms currentRoom = Rooms.RoomSleep;
-
-
+    private Node turretSound;
+    public static Rooms currentRoom = Rooms.RoomSleep;
+    
+    
     public override void _Ready()
     {
         foreach (Node n in GetChildren())
@@ -26,11 +28,13 @@ public partial class BeastManager : Node
         
         roomLazer = GetNode<ToggleVis>("/root/Main/room/RoomLazer");
         hallwayTurret = GetNode<ToggleVis>("/root/Main/screen/Turret");
+        turretSound = FindChild("TurretSound");
         MoveToPos(currentRoom);
     }
 
     public override void _Process(double delta)
     {
+        if(!BootCommand.boot) return;
         tick += delta;
 
         if (tick > moveInterval)
@@ -45,21 +49,27 @@ public partial class BeastManager : Node
         switch (currentRoom)
         {
             case Rooms.RoomSleep:
-                if(rnd.Next(0,2) == 1)
+                if(rnd.Next(0,5) == 0)
                     MoveToPos(room: Rooms.RoomAtDoor);
                 break;
             case Rooms.RoomAtDoor:
-                if (rnd.Next(0, 2) != 1) return;
+                if (roomLazer.On)
+                {
+                    MoveToPos(room: Rooms.RoomSleep);
+                    break;
+                }
                 
-                MoveToPos(room: hallwayTurret.On ? Rooms.RoomSleep : Rooms.RoomOutside);
+                MoveToPos(room: Rooms.RoomOutside);
 
                 break;
             case Rooms.RoomOutside:
-                if (rnd.Next(0, 2) != 1) return;
+                if (rnd.Next(0, 2) != 1) break;
                 
                 switch (rnd.Next(0, 3))
                 {
                     case 0:
+                        if(GhostManager.currentRoom is GhostManager.Rooms.HallwayBeforeTurret or GhostManager.Rooms.HallwayAfterTurret or GhostManager.Rooms.HallwayDoor) 
+                            return;
                         MoveToPos(room: Rooms.HallwayBeforeTurret);
                         break;
                     case 1:
@@ -70,37 +80,48 @@ public partial class BeastManager : Node
                 }
                 break;
             case Rooms.HallwayBeforeTurret:
-                if (rnd.Next(0, 2) != 1) return;
-                if (true) //turret on
+                if (rnd.Next(0, 2) != 1) break;
+                if (!hallwayTurret.On)
                 {
-                    //gunshot sound
-                    MoveToPos(room: Rooms.RoomSleep);
-                    return;
+                    MoveToPos(Rooms.HallwayAfterTurret);
+                    beast.GetChild(0).Call("play");
+                    moveInterval = 2;
+                    break;
                 }
-                MoveToPos(Rooms.HallwayAfterTurret);
-                break;
+                if (!Reactor.modEnergy(-20))
+                {
+                    Console.console.Print("Not enough power to shoot turret");
+                    MoveToPos(Rooms.HallwayAfterTurret);
+                    beast.GetChild(0).Call("play");
+                    moveInterval = 2;
+                    break;
+                }
+                
+                GD.Print("bang");
+                turretSound.Call("play");
+                MoveToPos(room: Rooms.RoomSleep);
+                return;
             case Rooms.HallwayAfterTurret:
                 if (rnd.Next(0, 2) != 1) return;
                 MoveToPos(room: Rooms.HallwayDoor);
                 break;
             case Rooms.HallwayDoor:
-                //kills u
+                GetTree().ChangeSceneToFile("res://death.tscn");
                 break;
             case Rooms.ReactorApproach:
                 blastCounter = 0;
-                Reactor.Energy -= 10;
-                Reactor.Energy = Mathf.Clamp(Reactor.Energy, 0, 100);
-                MoveToPos(room: Rooms.ReactorEating);
+                MoveToPos(room: Reactor.modEnergy(-10, true) ? Rooms.ReactorEating : Rooms.HallwayBeforeTurret);
                 break;
             case Rooms.ReactorEating:
-                Reactor.Energy -= 20;
-                Reactor.Energy = Mathf.Clamp(Reactor.Energy, 0, 100);
-                if (Reactor.Reacting)
+                if (!Reactor.modEnergy(-10, true))
                 {
-                    blastCounter++;
+                    MoveToPos(room: Rooms.HallwayBeforeTurret);
+                    break;
                 }
-                
-                if(blastCounter > 2) MoveToPos(room: Rooms.RoomSleep);
+                if (Reactor.Reacting)
+                    blastCounter++;
+
+                if (blastCounter > 1) MoveToPos(room: Rooms.RoomSleep);
                 break;
         }
     }

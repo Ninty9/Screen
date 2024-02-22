@@ -1,4 +1,4 @@
-[gd_resource type="ProjectCache" load_steps=8 format=3 uid="uid://c6nledmihewib"]
+[gd_resource type="ProjectCache" load_steps=11 format=3 uid="uid://c6nledmihewib"]
 
 [ext_resource type="BankAsset" uid="uid://dqglbhourqxa6" path="res://addons/FMOD/editor/resources/banks/{7e8c87c1-0a54-40bf-8b5c-f132f4ced5bf}.tres" id="1_1u35i"]
 [ext_resource type="BankAsset" uid="uid://c5mbweyo7eypf" path="res://addons/FMOD/editor/resources/banks/{e691a715-7b2f-0cfd-0d15-7bcc053dd327}.tres" id="2_fmqxy"]
@@ -6,7 +6,10 @@
 [ext_resource type="BusAsset" uid="uid://b1q83shrhb52n" path="res://addons/FMOD/editor/resources/busses/{e15e64b6-1380-4d1f-933e-7b97de59ae0c}.tres" id="4_1rbc2"]
 [ext_resource type="EventAsset" uid="uid://dgae5sys4bicj" path="res://addons/FMOD/editor/resources/events/{5fae2cd8-c455-490b-87a1-ea3fbd2f9cb5}.tres" id="5_hoj5l"]
 [ext_resource type="EventAsset" uid="uid://cf42pyvopdv1t" path="res://addons/FMOD/editor/resources/events/{0d0e706b-b132-4987-b9e6-06d93b4440e3}.tres" id="5_vcm1q"]
+[ext_resource type="EventAsset" uid="uid://cjet551xcl17l" path="res://addons/FMOD/editor/resources/events/{966e924f-621e-4217-a36e-76c2a7a704b6}.tres" id="5_wmbbr"]
+[ext_resource type="EventAsset" uid="uid://c3rc8ndho2l7t" path="res://addons/FMOD/editor/resources/events/{0e4a8358-df7e-4f17-b9b7-f5525e7909c0}.tres" id="5_x77h6"]
 [ext_resource type="EventAsset" uid="uid://bdxj823vch4fs" path="res://addons/FMOD/editor/resources/events/{6df2a9bb-d59d-4fde-8b93-0ee21d521e64}.tres" id="7_reyd8"]
+[ext_resource type="EventAsset" uid="uid://dhk8a15lsvs8x" path="res://addons/FMOD/editor/resources/events/{45935338-b4cd-4247-b6c0-c8c3e7508023}.tres" id="8_a87ri"]
 
 [resource]
 banks = {
@@ -15,8 +18,11 @@ banks = {
 }
 events = {
 "{0d0e706b-b132-4987-b9e6-06d93b4440e3}": ExtResource("5_vcm1q"),
+"{0e4a8358-df7e-4f17-b9b7-f5525e7909c0}": ExtResource("5_x77h6"),
+"{45935338-b4cd-4247-b6c0-c8c3e7508023}": ExtResource("8_a87ri"),
 "{5fae2cd8-c455-490b-87a1-ea3fbd2f9cb5}": ExtResource("5_hoj5l"),
-"{6df2a9bb-d59d-4fde-8b93-0ee21d521e64}": ExtResource("7_reyd8")
+"{6df2a9bb-d59d-4fde-8b93-0ee21d521e64}": ExtResource("7_reyd8"),
+"{966e924f-621e-4217-a36e-76c2a7a704b6}": ExtResource("5_wmbbr")
 }
 busses = {
 "{b57ea38f-a7cd-4b58-8aae-8245988bff94}": ExtResource("3_glc07"),
@@ -38,6 +44,18 @@ bank_tree = [{
 event_tree = [{
 "children": [],
 "item_type": 1,
+"node_name": "BugNear",
+"path": "event:/BugNear",
+"resource": ExtResource("5_x77h6")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "GhostNear",
+"path": "event:/GhostNear",
+"resource": ExtResource("5_wmbbr")
+}, {
+"children": [],
+"item_type": 1,
 "node_name": "Key",
 "path": "event:/Key",
 "resource": ExtResource("5_hoj5l")
@@ -53,6 +71,12 @@ event_tree = [{
 "node_name": "Term",
 "path": "event:/Term",
 "resource": ExtResource("7_reyd8")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "Turret",
+"path": "event:/Turret",
+"resource": ExtResource("8_a87ri")
 }]
 bus_tree = [{
 "children": [{

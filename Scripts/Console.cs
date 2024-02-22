@@ -11,9 +11,11 @@ public partial class Console : VBoxContainer
     [Export] private LineEdit input;
     public readonly List<Command> CommandList = new ();
     private Node sound;
+    public static Console console;
 
     public override void _Ready()
     {
+        console = this;
         sound = FindChild("Sound");
         foreach (Node n in GetChildren())
             if (n is Command c) CommandList.Add(c);
@@ -23,6 +25,7 @@ public partial class Console : VBoxContainer
         
         Print("SecurOS V1.6.2");
         Print("Remember to read the manual.");
+        Print("System is currently offline, run 'boot' to start your shift.");
     }
 
     public void _on_text_changed(string _)
@@ -40,8 +43,10 @@ public partial class Console : VBoxContainer
         {
             if (args[0] == c.Name)
             {
-                c.Run(args);
-                Reactor.Energy -= c.PowerCost;
+                if(Reactor.modEnergy(-c.PowerCost))
+                    c.Run(args);
+                else
+                    Print("Not enough power.");
                 found = true;
             }
         }

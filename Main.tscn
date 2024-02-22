@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dy2c6845m3gxx"]
+[gd_scene load_steps=62 format=3 uid="uid://dy2c6845m3gxx"]
 
 [ext_resource type="Script" path="res://Scripts/CamPos.cs" id="1_6cqrj"]
 [ext_resource type="Theme" uid="uid://ct57t5xfmm2w6" path="res://CsText.tres" id="1_p8cg3"]
@@ -7,29 +7,36 @@
 [ext_resource type="Script" path="res://Scripts/Console.cs" id="3_nfy56"]
 [ext_resource type="PackedScene" uid="uid://dw8j5llrt630x" path="res://rich_text_label.tscn" id="3_wlu8x"]
 [ext_resource type="Script" path="res://Scripts/ScrollDown.cs" id="4_of5mr"]
-[ext_resource type="Script" path="res://Commands/BogosCommand.cs" id="7_6f3l2"]
 [ext_resource type="PackedScene" uid="uid://dwk3d7kknqb2d" path="res://Models/server.blend" id="7_nusjb"]
-[ext_resource type="Script" path="res://Scripts/MeshInstance3D.cs" id="8_5phfx"]
 [ext_resource type="Script" path="res://Commands/DoorCommand.cs" id="8_ss1e6"]
 [ext_resource type="Script" path="res://Commands/HelpCommand.cs" id="9_kryt3"]
 [ext_resource type="PackedScene" uid="uid://crsjatqh2jcg" path="res://screen.tscn" id="10_blxdg"]
+[ext_resource type="Script" path="res://Commands/TurretCommand.cs" id="10_byl8y"]
 [ext_resource type="PackedScene" uid="uid://dfb8pk3kr7kff" path="res://Models/reactor.blend" id="11_gvh0r"]
 [ext_resource type="Script" path="res://Scripts/EnergyLabel.cs" id="11_k7yyp"]
+[ext_resource type="Script" path="res://Commands/SatCommand.cs" id="11_vmxe1"]
 [ext_resource type="Script" path="res://Scripts/MatchReactorSpot.cs" id="12_0erjg"]
 [ext_resource type="Script" path="res://Scripts/Reactor.cs" id="12_5j06u"]
 [ext_resource type="Script" path="res://Scripts/MatchReactorOmni.cs" id="12_mc0wx"]
+[ext_resource type="Script" path="res://Scripts/Noise.cs" id="13_n52kt"]
+[ext_resource type="Script" path="res://Commands/BootCommand.cs" id="13_rssdq"]
 [ext_resource type="Texture2D" uid="uid://db1gagdmi4q56" path="res://Pictures/manPage1.jpg" id="14_nqmhm"]
 [ext_resource type="EventAsset" uid="uid://cf42pyvopdv1t" path="res://addons/FMOD/editor/resources/events/{0d0e706b-b132-4987-b9e6-06d93b4440e3}.tres" id="15_g8j6r"]
 [ext_resource type="Texture2D" uid="uid://cq1hlhh0xl82x" path="res://Pictures/manPage2.png" id="15_xhtel"]
 [ext_resource type="Texture2D" uid="uid://q70xbrc2thcx" path="res://Pictures/manPage3.png" id="16_nl76u"]
 [ext_resource type="Script" path="res://Scripts/manual.cs" id="17_3h2jg"]
 [ext_resource type="BankAsset" uid="uid://dqglbhourqxa6" path="res://addons/FMOD/editor/resources/banks/{7e8c87c1-0a54-40bf-8b5c-f132f4ced5bf}.tres" id="18_mofi2"]
+[ext_resource type="Script" path="res://Scripts/CamStatic.cs" id="20_ucjql"]
 [ext_resource type="PackedScene" uid="uid://dws37qrj72mlk" path="res://room.tscn" id="21_tlpfa"]
+[ext_resource type="Texture2D" uid="uid://dqajmcvnoxqyi" path="res://Pictures/callcodes.png" id="22_tv8xa"]
 [ext_resource type="PackedScene" uid="uid://yo83o8rof6jc" path="res://Models/outside.blend" id="26_tiof8"]
 [ext_resource type="Script" path="res://Scripts/BeastManager.cs" id="27_m24ox"]
 [ext_resource type="Script" path="res://Scripts/beast.cs" id="28_d6rie"]
 [ext_resource type="Script" path="res://Scripts/Start_Ik.gd" id="29_h023j"]
 [ext_resource type="Script" path="res://Scripts/BeastPos.cs" id="30_gy0vc"]
+[ext_resource type="EventAsset" uid="uid://dhk8a15lsvs8x" path="res://addons/FMOD/editor/resources/events/{45935338-b4cd-4247-b6c0-c8c3e7508023}.tres" id="31_wt70y"]
+[ext_resource type="Script" path="res://Scripts/GhostManager.cs" id="33_g7ii5"]
+[ext_resource type="Script" path="res://Scripts/GhostPos.cs" id="34_yf64j"]
 
 [sub_resource type="Environment" id="Environment_anmup"]
 background_mode = 1
@@ -49,17 +56,31 @@ name = "Key"
 [sub_resource type="ViewportTexture" id="ViewportTexture_j31vm"]
 viewport_path = NodePath("TerminalViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xytnn"]
-viewport_path = NodePath("Server Room/SubViewport")
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jnp3v"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y0rcq"]
+noise = SubResource("FastNoiseLite_jnp3v")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xug0m"]
-viewport_path = NodePath("screen2/TurretViewport")
+viewport_path = NodePath("screen/TurretViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_i8lu4"]
 viewport_path = NodePath("room/RoomView")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_sygsv"]
-viewport_path = NodePath("screen2/DoorViewport")
+viewport_path = NodePath("screen/DoorViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xytnn"]
+viewport_path = NodePath("Server Room/SubViewport")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_egwvv"]
+noise_type = 0
+seed = 3
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_17ckm"]
+noise = SubResource("FastNoiseLite_egwvv")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_k1tqg"]
 viewport_path = NodePath("reactor/SubViewport")
@@ -89,16 +110,24 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_nyagx"]
 size = Vector3(0.508301, 0.707306, 0.0529785)
 
-[sub_resource type="BoxMesh" id="BoxMesh_hccyv"]
-
 [sub_resource type="Environment" id="Environment_sxn7t"]
 background_color = Color(0, 0.282353, 1, 1)
 background_energy_multiplier = 0.0
-ambient_light_source = 2
+ambient_light_source = 1
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.03
 glow_enabled = true
+volumetric_fog_enabled = true
 volumetric_fog_density = 0.3018
+
+[sub_resource type="EventAsset" id="EventAsset_5rqnd"]
+is_3d = true
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/BugNear"
+guid = "{0e4a8358-df7e-4f17-b9b7-f5525e7909c0}"
+name = "BugNear"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fnsx"]
 resource_name = "Material"
@@ -233,13 +262,35 @@ bind/21/name = &"BL"
 bind/21/bone = -1
 bind/21/pose = Transform3D(-0.259297, -0.0604614, -0.963903, 0.26441, -0.964351, -0.0106389, -0.928899, -0.257624, 0.26604, -2.61271, -3.1551, 2.58208)
 
+[sub_resource type="Gradient" id="Gradient_fofuw"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bryuo"]
+gradient = SubResource("Gradient_fofuw")
+width = 200
+height = 400
+
+[sub_resource type="EventAsset" id="EventAsset_pgn68"]
+is_3d = true
+min_distance = 0.7
+max_distance = 15.0
+path = "event:/GhostNear"
+guid = "{966e924f-621e-4217-a36e-76c2a7a704b6}"
+name = "GhostNear"
+
 [node name="Main" type="Node3D"]
 
-[node name="CamHolder" type="Node3D" parent="." node_paths=PackedStringArray("camera", "camPos")]
+[node name="CamHolder" type="Node3D" parent="." node_paths=PackedStringArray("camera", "camPos", "input", "left", "right", "up", "down", "tutorial")]
 script = ExtResource("1_xe4c0")
 camera = NodePath("Camera3D")
 camPos = NodePath("TermPos")
-moveDuration = 2.0
+moveDuration = 1.0
+input = NodePath("../InputWindow/Control/LineEdit")
+left = NodePath("Control/left")
+right = NodePath("Control/right")
+up = NodePath("Control/up")
+down = NodePath("Control/down")
+tutorial = NodePath("Control/Label")
 
 [node name="Camera3D" type="Camera3D" parent="CamHolder"]
 cull_mask = 1047553
@@ -262,12 +313,13 @@ transform = Transform3D(0.790073, 0.596823, -0.139958, 0.0132758, 0.211599, 0.97
 script = ExtResource("1_6cqrj")
 Left = NodePath("../TermPos")
 Right = NodePath("../DoorPos")
-Up = NodePath("../ScreensPos")
+Up = NodePath("../PosterPos")
 
 [node name="DoorPos" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Left")]
 transform = Transform3D(-0.300458, 0.0104055, -0.953738, 0.0092326, 0.999925, 0.0080009, 0.953751, -0.00640154, -0.300532, 1.67402, -0.0767567, -0.367792)
 script = ExtResource("1_6cqrj")
 Left = NodePath("../ManualPos")
+isDoor = true
 
 [node name="TermPos" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Left", "Right", "Up")]
 transform = Transform3D(1, 0, 0, 0, 0.920682, 0.390313, 0, -0.390313, 0.920682, 0, 0.198789, -0.642755)
@@ -286,8 +338,69 @@ Up = NodePath("../ScreensPos")
 transform = Transform3D(1, 0, 0, 0, 0.982603, -0.185718, 0, 0.185718, 0.982603, 0, 0.675631, -0.791176)
 script = ExtResource("1_6cqrj")
 Left = NodePath("../ReactorPos")
-Right = NodePath("../ManualPos")
+Right = NodePath("../PosterPos")
 Down = NodePath("../TermPos")
+
+[node name="PosterPos" type="Node3D" parent="CamHolder" node_paths=PackedStringArray("Left", "Right", "Down")]
+transform = Transform3D(0.986159, -0.00329007, -0.165772, -1.86265e-09, 0.999803, -0.019843, 0.165805, 0.0195684, 0.985964, 1.7022, 0.619138, -1.13799)
+script = ExtResource("1_6cqrj")
+Left = NodePath("../ScreensPos")
+Right = NodePath("../DoorPos")
+Down = NodePath("../ManualPos")
+
+[node name="Control" type="Control" parent="CamHolder"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="left" type="Label" parent="CamHolder/Control"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 517.0
+offset_right = 57.0
+offset_bottom = 572.0
+theme_override_font_sizes/font_size = 40
+text = "<"
+
+[node name="right" type="Label" parent="CamHolder/Control"]
+layout_mode = 0
+offset_left = 1843.0
+offset_top = 496.0
+offset_right = 1883.0
+offset_bottom = 551.0
+theme_override_font_sizes/font_size = 40
+text = ">"
+
+[node name="up" type="Label" parent="CamHolder/Control"]
+layout_mode = 0
+offset_left = 941.0
+offset_top = 28.0
+offset_right = 981.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 40
+text = "^"
+
+[node name="down" type="Label" parent="CamHolder/Control"]
+layout_mode = 0
+offset_left = 981.0
+offset_top = 950.0
+offset_right = 1021.0
+offset_bottom = 1005.0
+theme_override_font_sizes/font_size = 40
+text = "V"
+
+[node name="Label" type="Label" parent="CamHolder/Control"]
+layout_mode = 0
+offset_left = 799.0
+offset_top = 463.0
+offset_right = 1153.0
+offset_bottom = 532.0
+theme_override_font_sizes/font_size = 50
+text = "WASD to Move"
 
 [node name="TerminalViewport" type="SubViewport" parent="."]
 size = Vector2i(1080, 370)
@@ -332,19 +445,29 @@ script = ExtResource("3_nfy56")
 textPrefab = ExtResource("3_wlu8x")
 input = NodePath("../../../../../InputWindow/Control/LineEdit")
 
-[node name="bint" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
-script = ExtResource("7_6f3l2")
-Description = "Will bint whatever, idfk."
-PowerCost = 1
-
 [node name="door" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
 script = ExtResource("8_ss1e6")
-Description = "open/close a door.|Usage: door [open/close] [door code]"
+Description = "open/close a door.|Usage: door [doorId] [on/off]. | \"door\" on its own will show you all available doors. "
+PowerCost = 2
+
+[node name="turret" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
+script = ExtResource("10_byl8y")
+Description = "Turn the turret on or off.|Usage: turret [on/off]"
+
+[node name="sat" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
+script = ExtResource("11_vmxe1")
+calculationLength = 60.0
+reLength = 60.0
+Description = "Interact with the satelites and servers.|Usage: sat [calc/setup/send]"
 PowerCost = 2
 
 [node name="help" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
 script = ExtResource("9_kryt3")
 Description = "Shows every command and its description."
+
+[node name="boot" type="Node" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
+script = ExtResource("13_rssdq")
+Description = "Starts the system"
 
 [node name="Sound" type="StudioEventEmitter3D" parent="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer"]
 event = SubResource("EventAsset_unha6")
@@ -353,7 +476,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248384, -0.984532)
 [node name="InputWindow" type="Window" parent="."]
 disable_3d = true
 title = "Input"
-initial_position = 2
+position = Vector2i(784, 485)
 size = Vector2i(200, 40)
 transient = true
 unresizable = true
@@ -375,62 +498,65 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_p8cg3")
+placeholder_text = "Type here"
 caret_blink = true
 
-[node name="screen2" parent="." instance=ExtResource("10_blxdg")]
+[node name="screen" parent="." instance=ExtResource("10_blxdg")]
 
-[node name="Term" type="Sprite3D" parent="screen2"]
+[node name="Term" type="Sprite3D" parent="screen"]
 transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 0, 0.101599, -1.39635)
 top_level = true
 texture = SubResource("ViewportTexture_j31vm")
 
-[node name="Entrance" type="Sprite3D" parent="screen2"]
-transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.452943, 0.666282, -1.40745)
+[node name="Entrance" type="Sprite3D" parent="screen"]
+transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.471219, 0.666282, -1.40745)
 top_level = true
-texture = SubResource("ViewportTexture_xytnn")
+texture = SubResource("NoiseTexture2D_y0rcq")
+script = ExtResource("13_n52kt")
 
-[node name="Turret" type="Sprite3D" parent="screen2"]
+[node name="Turret2" type="Sprite3D" parent="screen"]
 transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, 0.466213, 0.668062, -1.40745)
 top_level = true
 texture = SubResource("ViewportTexture_xug0m")
 
-[node name="BugRoom" type="Sprite3D" parent="screen2"]
+[node name="BugRoom" type="Sprite3D" parent="screen"]
 transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, 0.464837, 1.10484, -1.40745)
 top_level = true
 texture = SubResource("ViewportTexture_i8lu4")
 
-[node name="Door" type="Sprite3D" parent="screen2"]
-transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, 0.00926924, 0.663447, -1.40745)
+[node name="Door" type="Sprite3D" parent="screen"]
+transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.00990949, 0.667779, -1.40745)
 top_level = true
 texture = SubResource("ViewportTexture_sygsv")
 
-[node name="Server" type="Sprite3D" parent="screen2"]
+[node name="Server" type="Sprite3D" parent="screen"]
 transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.456895, 1.11207, -1.40745)
 top_level = true
 texture = SubResource("ViewportTexture_xytnn")
 
-[node name="Comms" type="Sprite3D" parent="screen2"]
+[node name="Comms" type="Sprite3D" parent="screen"]
 transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.00616921, 1.11014, -1.40745)
 top_level = true
-texture = SubResource("ViewportTexture_xytnn")
+texture = SubResource("NoiseTexture2D_17ckm")
+script = ExtResource("13_n52kt")
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="screen2"]
+[node name="OmniLight3D3" type="OmniLight3D" parent="screen"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149956, 1.31282, 2.03489)
 visible = false
 light_color = Color(1, 0, 0, 1)
 light_volumetric_fog_energy = 1.455
 light_specular = 0.0
 
-[node name="Sprite3D3" type="Sprite3D" parent="screen2"]
+[node name="Sprite3D3" type="Sprite3D" parent="screen"]
 transform = Transform3D(0.093457, -0.18932, 0.198806, 0, 0.21001, 0.19999, -0.274528, -0.0644498, 0.067679, -2.1704, 0.114596, 0.377219)
 texture = SubResource("ViewportTexture_k1tqg")
 
-[node name="Label3D" type="Label3D" parent="screen2/Sprite3D3"]
+[node name="Label3D" type="Label3D" parent="screen/Sprite3D3"]
 transform = Transform3D(1, -1.49012e-08, 1.49012e-08, 0, 1, -7.45058e-09, 0, -1.11759e-08, 1, 2.29799, 2.77427, 9.53674e-07)
 text = "23%"
 script = ExtResource("11_k7yyp")
 
-[node name="OmniLight3D" type="SpotLight3D" parent="screen2/Sprite3D3"]
+[node name="OmniLight3D" type="SpotLight3D" parent="screen/Sprite3D3"]
 transform = Transform3D(1, -1.10629e-07, 1.455e-07, -1.455e-07, -0.963603, 0.267339, 1.10629e-07, -0.267339, -0.963603, 7.15256e-07, -0.0395012, 0.194077)
 light_color = Color(0, 0.666667, 1, 1)
 light_energy = 0.0
@@ -441,19 +567,19 @@ spot_range = 8.32796
 spot_angle = 83.4711
 script = ExtResource("12_0erjg")
 
-[node name="DoorViewport" type="SubViewport" parent="screen2"]
+[node name="DoorViewport" type="SubViewport" parent="screen"]
 
-[node name="Camera3D" type="Camera3D" parent="screen2/DoorViewport"]
+[node name="Camera3D" type="Camera3D" parent="screen/DoorViewport"]
 transform = Transform3D(0.854694, -0.27912, 0.437709, -1.07186e-08, 0.843157, 0.537668, -0.519131, -0.459541, 0.720642, 10.0745, 3.9005, 8.46836)
 current = true
 
-[node name="TurretViewport" type="SubViewport" parent="screen2"]
+[node name="TurretViewport" type="SubViewport" parent="screen"]
 
-[node name="Camera3D" type="Camera3D" parent="screen2/TurretViewport"]
+[node name="Camera3D" type="Camera3D" parent="screen/TurretViewport"]
 transform = Transform3D(-0.337095, -0.794028, 0.505852, 0, 0.5373, 0.843391, -0.941471, 0.284303, -0.181121, 10.334, 3.9, 14.621)
 current = true
 
-[node name="Sprite3D" type="AnimatedSprite3D" parent="screen2"]
+[node name="Sprite3D" type="AnimatedSprite3D" parent="screen"]
 transform = Transform3D(0.808914, 0.587926, 2.56991e-08, 0, -4.37114e-08, 1, 0.587926, -0.808914, -3.53588e-08, 1.59031, -0.780388, -1.50126)
 pixel_size = 0.0003
 sprite_frames = SubResource("SpriteFrames_wln7w")
@@ -461,11 +587,57 @@ animation = &"pages"
 frame_progress = 1.0
 script = ExtResource("17_3h2jg")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="screen2/Sprite3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="screen/Sprite3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="screen2/Sprite3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="screen/Sprite3D/StaticBody3D"]
 transform = Transform3D(1, 2.98023e-08, -4.13891e-13, -2.98023e-08, 1, -2.02505e-13, 1.24345e-14, 1.47971e-12, 0.999975, -0.00122178, 0.000963688, -0.0299068)
 shape = SubResource("BoxShape3D_nyagx")
+
+[node name="static" type="Node3D" parent="screen"]
+process_mode = 3
+visible = false
+script = ExtResource("20_ucjql")
+
+[node name="Comms2" type="Sprite3D" parent="screen/static"]
+transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.45726, 1.09653, -1.38125)
+top_level = true
+texture = SubResource("NoiseTexture2D_17ckm")
+script = ExtResource("13_n52kt")
+
+[node name="Comms3" type="Sprite3D" parent="screen/static"]
+transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, 0.451161, 1.08499, -1.38125)
+top_level = true
+texture = SubResource("NoiseTexture2D_17ckm")
+script = ExtResource("13_n52kt")
+
+[node name="Comms4" type="Sprite3D" parent="screen/static"]
+transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.00592583, 1.11014, -1.38125)
+top_level = true
+texture = SubResource("NoiseTexture2D_17ckm")
+script = ExtResource("13_n52kt")
+
+[node name="Comms5" type="Sprite3D" parent="screen/static"]
+transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.45726, 0.649369, -1.36838)
+top_level = true
+texture = SubResource("NoiseTexture2D_17ckm")
+script = ExtResource("13_n52kt")
+
+[node name="Comms6" type="Sprite3D" parent="screen/static"]
+transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, 0.451161, 0.661397, -1.38793)
+top_level = true
+texture = SubResource("NoiseTexture2D_17ckm")
+script = ExtResource("13_n52kt")
+
+[node name="Comms7" type="Sprite3D" parent="screen/static"]
+transform = Transform3D(0.078, 0, 0, 0, 0.078, 0, 0, 0, 0.078, -0.00505546, 0.65944, -1.38354)
+top_level = true
+texture = SubResource("NoiseTexture2D_17ckm")
+script = ExtResource("13_n52kt")
+
+[node name="Sprite3D2" type="Sprite3D" parent="screen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9233, 0.702631, -2.9975)
+pixel_size = 0.0003
+texture = ExtResource("22_tv8xa")
 
 [node name="reactor" parent="." instance=ExtResource("11_gvh0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -21.2144)
@@ -487,7 +659,7 @@ shadow_enabled = true
 spot_range = 17.475
 spot_angle = 27.2608
 script = ExtResource("12_5j06u")
-gainPerSecond = 30.0
+gainPerSecond = 5.0
 sound = NodePath("StudioEventEmitter3D")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="reactor/SpotLight3D"]
@@ -528,11 +700,6 @@ transform = Transform3D(0.73373, -0.360049, 0.576199, 0, 0.848048, 0.529919, -0.
 current = true
 fov = 70.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Server Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.71052, 0.729736, 0.158356)
-mesh = SubResource("BoxMesh_hccyv")
-script = ExtResource("8_5phfx")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="Server Room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.37581, 7.43146, 3.86826)
 layers = 2
@@ -553,6 +720,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5143, 0, -19.1813)
 
 [node name="Camera3D" type="Camera3D" parent="room/RoomView"]
 transform = Transform3D(-0.397148, -0.433686, 0.80882, 0, 0.881303, 0.472551, -0.917755, 0.187673, -0.350008, -13.6427, 2.96, -22.8633)
+current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sxn7t")
@@ -563,7 +731,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.2142, 0, 8.86058)
 [node name="BeastManager" type="Node" parent="." node_paths=PackedStringArray("beast")]
 script = ExtResource("27_m24ox")
 beast = NodePath("beast2")
-currentRoom = 6
 
 [node name="HallwayBeforeTurret" type="Node3D" parent="BeastManager"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 7.77312, 0.689, 20.4039)
@@ -666,6 +833,23 @@ transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 1.49012e-08, 2.9802
 [node name="BL" type="Marker3D" parent="BeastManager/ReactorApproach"]
 transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 1.49012e-08, 2.98023e-08, 1.49012e-08, 1, 1.86001, 0.186281, -4.67383)
 
+[node name="ReactorEating" type="Node3D" parent="BeastManager"]
+transform = Transform3D(0.535709, -0.670913, -0.512729, 0, 0.607209, -0.794542, 0.844403, 0.425643, 0.325288, 21.2955, 0.648276, -23.0147)
+script = ExtResource("30_gy0vc")
+room = 7
+
+[node name="FR" type="Marker3D" parent="BeastManager/ReactorEating"]
+transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 1.49012e-08, 2.98023e-08, 1.49012e-08, 1, 0.125966, 3.00987, 3.22827)
+
+[node name="FL" type="Marker3D" parent="BeastManager/ReactorEating"]
+transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 1.49012e-08, 2.98023e-08, 1.49012e-08, 1, 5.41183, 1.76602, 2.56459)
+
+[node name="BR" type="Marker3D" parent="BeastManager/ReactorEating"]
+transform = Transform3D(1, 0, -2.98023e-08, -2.98023e-08, 1, 1.49012e-08, 2.98023e-08, 1.49012e-08, 1, -2.59231, -1.56997, -0.78014)
+
+[node name="BL" type="Marker3D" parent="BeastManager/ReactorEating"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 1.49012e-08, 2.98023e-08, 1.49012e-08, 1, 2.12461, -3.00849, -1.18028)
+
 [node name="HallwayDoor" type="Node3D" parent="BeastManager"]
 transform = Transform3D(-0.674805, 0, -0.737996, 0, 1, 0, 0.737996, 0, -0.674805, 6.95141, 0.689, 2.70931)
 script = ExtResource("30_gy0vc")
@@ -687,6 +871,10 @@ transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 2.71909,
 transform = Transform3D(0.535709, -0.670913, -0.51273, 0, 0.607209, -0.794542, 0.844403, 0.425643, 0.325288, 21.8318, 3.12281, -24.0426)
 script = ExtResource("28_d6rie")
 
+[node name="StudioEventEmitter3D" type="StudioEventEmitter3D" parent="BeastManager/beast2"]
+event = SubResource("EventAsset_5rqnd")
+transform = Transform3D(1, -2.98023e-08, 0, -2.98023e-08, 1, -1.49012e-08, -2.98023e-08, 1.49012e-08, 1, 0, 0, 0)
+
 [node name="Armature" type="Node3D" parent="BeastManager/beast2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.494353)
 
@@ -696,7 +884,7 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 1.39977e-12, 8.74228e-08, 8.74228e-08, -3.20673e-05, -1, 1.39977e-12, 1, -3.20673e-05, 0, -2.90146e-05, -0.97357)
 bones/0/enabled = true
 bones/0/position = Vector3(0, -2.90146e-05, -0.97357)
-bones/0/rotation = Quaternion(0.707118, 3.09086e-08, 3.09086e-08, 0.707096)
+bones/0/rotation = Quaternion(0.707118, 3.09086e-08, 3.09086e-08, 0.707095)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Head"
 bones/1/parent = 0
@@ -724,21 +912,21 @@ bones/4/parent = 1
 bones/4/rest = Transform3D(0.992859, 0.118934, -0.00922235, -0.114044, 0.923677, -0.365806, -0.0349882, 0.364246, 0.930645, -0.5935, 0.671812, 0.0709427)
 bones/4/enabled = true
 bones/4/position = Vector3(-0.5935, 0.671812, 0.0709427)
-bones/4/rotation = Quaternion(0.186103, 0.00656815, -0.05939, 0.980712)
+bones/4/rotation = Quaternion(0.186103, 0.00656817, -0.0593899, 0.980712)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "ManR2"
 bones/5/parent = 4
 bones/5/rest = Transform3D(0.863515, 0.500963, -0.0581139, -0.411105, 0.765963, 0.494261, 0.292119, -0.402911, 0.867369, 2.23517e-08, 0.250668, 5.40167e-08)
 bones/5/enabled = true
 bones/5/position = Vector3(2.23517e-08, 0.250668, 5.40167e-08)
-bones/5/rotation = Quaternion(-0.239887, -0.093646, -0.24387, 0.934993)
-bones/5/scale = Vector3(1, 1, 1)
+bones/5/rotation = Quaternion(-0.239887, -0.0936458, -0.24387, 0.934993)
+bones/5/scale = Vector3(0.999999, 1, 1)
 bones/6/name = "FL1"
 bones/6/parent = 0
 bones/6/rest = Transform3D(0.766868, 0.641087, 0.0303462, -0.633337, 0.76356, -0.125939, -0.103909, 0.0773591, 0.991574, 0.882375, 1.99846, 0.313272)
 bones/6/enabled = true
 bones/6/position = Vector3(0.882375, 1.99846, 0.313272)
-bones/6/rotation = Quaternion(0.0541637, 0.0357689, -0.339538, 0.93835)
+bones/6/rotation = Quaternion(0.0541637, 0.035769, -0.339539, 0.93835)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "FL2"
 bones/7/parent = 6
@@ -746,7 +934,7 @@ bones/7/rest = Transform3D(0.204203, 0.437872, 0.875539, -0.978121, 0.0549346, 0
 bones/7/enabled = true
 bones/7/position = Vector3(2.23517e-08, 0.475569, -1.49012e-08)
 bones/7/rotation = Quaternion(-0.421236, 0.320633, -0.543225, 0.651661)
-bones/7/scale = Vector3(1, 1, 1)
+bones/7/scale = Vector3(1, 1, 0.999999)
 bones/8/name = "FL3"
 bones/8/parent = 7
 bones/8/rest = Transform3D(0.789257, -0.396891, 0.468563, -0.142047, -0.860361, -0.489492, 0.597409, 0.319777, -0.735422, -1.11759e-07, 2.06499, 1.19209e-07)
@@ -759,42 +947,42 @@ bones/9/parent = 8
 bones/9/rest = Transform3D(0.952153, 0.296454, 0.0742961, -0.296455, 0.836795, 0.460313, 0.0742909, -0.460314, 0.884642, 0, 4.37096, 2.6077e-07)
 bones/9/enabled = true
 bones/9/position = Vector3(0, 4.37096, 2.6077e-07)
-bones/9/rotation = Quaternion(-0.240164, 1.3586e-06, -0.154672, 0.958331)
+bones/9/rotation = Quaternion(-0.240164, 1.36832e-06, -0.154672, 0.958331)
 bones/9/scale = Vector3(1, 1, 1)
 bones/10/name = "FR1"
 bones/10/parent = 0
 bones/10/rest = Transform3D(0.766869, -0.641087, 0.0303304, 0.641307, 0.76356, -0.0755122, 0.0252508, 0.0773591, 0.996683, -0.886367, 1.99702, 0.317464)
 bones/10/enabled = true
 bones/10/position = Vector3(-0.886367, 1.99702, 0.317464)
-bones/10/rotation = Quaternion(0.0406992, 0.00135237, 0.341414, 0.93903)
+bones/10/rotation = Quaternion(0.0406992, 0.00135236, 0.341414, 0.93903)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/name = "FR2"
 bones/11/parent = 10
 bones/11/rest = Transform3D(-0.88911, -0.365613, 0.275338, -0.315916, 0.0549347, -0.947195, 0.331181, -0.929144, -0.164346, -4.65661e-09, 0.475569, -1.49012e-08)
 bones/11/enabled = true
 bones/11/position = Vector3(-4.65661e-09, 0.475569, -1.49012e-08)
-bones/11/rotation = Quaternion(0.234681, -0.726015, 0.646109, 0.0192294)
-bones/11/scale = Vector3(1, 1, 1)
+bones/11/rotation = Quaternion(-0.234681, 0.726015, -0.646109, -0.0192292)
+bones/11/scale = Vector3(1, 1, 0.999999)
 bones/12/name = "FR3"
 bones/12/parent = 11
 bones/12/rest = Transform3D(0.849775, 0.0781557, 0.52132, -0.206689, -0.860361, 0.465897, 0.484935, -0.503658, -0.714959, 4.47035e-08, 2.06499, -2.98023e-08)
 bones/12/enabled = true
 bones/12/position = Vector3(4.47035e-08, 2.06499, -2.98023e-08)
-bones/12/rotation = Quaternion(-0.925351, 0.0347255, -0.271858, 0.261943)
+bones/12/rotation = Quaternion(0.925351, -0.0347257, 0.271858, -0.261942)
 bones/12/scale = Vector3(1, 1, 1)
 bones/13/name = "FR"
 bones/13/parent = 12
 bones/13/rest = Transform3D(0.946884, 0.302918, -0.107939, -0.302919, 0.727538, -0.615572, -0.107939, 0.615572, 0.780654, 1.49012e-07, 4.37096, 1.49012e-08)
 bones/13/enabled = true
 bones/13/position = Vector3(1.49012e-07, 4.37096, 1.49012e-08)
-bones/13/rotation = Quaternion(0.331169, -2.6054e-08, -0.162966, 0.929392)
+bones/13/rotation = Quaternion(0.331169, 6.21288e-08, -0.162966, 0.929392)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/name = "BR1"
 bones/14/parent = 0
 bones/14/rest = Transform3D(-0.56516, -0.514794, -0.644656, -0.0290876, -0.768499, 0.63919, -0.824468, 0.379996, 0.419351, -1.09849, 0.428675, 0.418115)
 bones/14/enabled = true
 bones/14/position = Vector3(-1.09849, 0.428675, 0.418115)
-bones/14/rotation = Quaternion(-0.442716, 0.307128, 0.82961, 0.146366)
+bones/14/rotation = Quaternion(-0.442715, 0.307128, 0.82961, 0.146366)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/name = "BR2"
 bones/15/parent = 14
@@ -808,42 +996,42 @@ bones/16/parent = 15
 bones/16/rest = Transform3D(-0.773015, -0.628727, 0.0845591, 0.633938, -0.760556, 0.140276, -0.0238834, 0.162041, 0.986495, 0, 2.24831, -5.21541e-08)
 bones/16/enabled = true
 bones/16/position = Vector3(0, 2.24831, -5.21541e-08)
-bones/16/rotation = Quaternion(0.01617, 0.080567, 0.938092, 0.336498)
+bones/16/rotation = Quaternion(0.01617, 0.0805671, 0.938092, 0.336498)
 bones/16/scale = Vector3(1, 1, 1)
 bones/17/name = "BR"
 bones/17/parent = 16
 bones/17/rest = Transform3D(0.999964, 0.00799474, -0.00268402, -0.00799499, 0.797437, -0.603349, -0.00268328, 0.603349, 0.797473, -2.38419e-07, 4.18877, -1.93715e-07)
 bones/17/enabled = true
 bones/17/position = Vector3(-2.38419e-07, 4.18877, -1.93715e-07)
-bones/17/rotation = Quaternion(0.318219, -1.95436e-07, -0.00421666, 0.948008)
+bones/17/rotation = Quaternion(0.31822, -1.9605e-07, -0.00421667, 0.948008)
 bones/17/scale = Vector3(1, 1, 1)
 bones/18/name = "BL1"
 bones/18/parent = 0
 bones/18/rest = Transform3D(-0.565149, 0.514794, -0.644665, -0.637499, -0.768498, -0.0548136, -0.523642, 0.379996, 0.762497, 1.09603, 0.426388, 0.418886)
 bones/18/enabled = true
 bones/18/position = Vector3(1.09603, 0.426388, 0.418886)
-bones/18/rotation = Quaternion(0.331983, -0.092403, -0.879793, 0.327433)
-bones/18/scale = Vector3(1, 1, 1)
+bones/18/rotation = Quaternion(-0.331984, 0.0924031, 0.879793, -0.327433)
+bones/18/scale = Vector3(1, 0.999999, 1)
 bones/19/name = "BL2"
 bones/19/parent = 18
 bones/19/rest = Transform3D(-0.600024, 0.585356, 0.54528, -0.669083, 0.00643027, -0.74316, -0.438519, -0.810752, 0.387793, 1.49012e-08, 0.530721, 5.21541e-08)
 bones/19/enabled = true
 bones/19/position = Vector3(1.49012e-08, 0.530721, 5.21541e-08)
-bones/19/rotation = Quaternion(-0.0379225, 0.551965, -0.703809, 0.445589)
+bones/19/rotation = Quaternion(0.0379225, -0.551965, 0.703809, -0.445589)
 bones/19/scale = Vector3(1, 1, 1)
 bones/20/name = "BL3"
 bones/20/parent = 19
 bones/20/rest = Transform3D(-0.894396, -0.440253, -0.0789455, 0.418209, -0.760556, -0.496644, 0.158607, -0.477213, 0.864356, -5.96046e-08, 2.24831, -8.9407e-08)
 bones/20/enabled = true
 bones/20/position = Vector3(-5.96046e-08, 2.24831, -8.9407e-08)
-bones/20/rotation = Quaternion(0.0212318, -0.259559, 0.937991, 0.228803)
-bones/20/scale = Vector3(1, 1, 1)
+bones/20/rotation = Quaternion(0.021232, -0.259559, 0.937991, 0.228803)
+bones/20/scale = Vector3(1, 1, 0.999999)
 bones/21/name = "BL"
 bones/21/parent = 20
 bones/21/rest = Transform3D(0.968118, -0.250488, -0.0017246, 0.250488, 0.968025, 0.0135782, -0.00173172, -0.0135773, 0.999906, 2.98023e-08, 4.18877, 5.96046e-08)
 bones/21/enabled = true
 bones/21/position = Vector3(2.98023e-08, 4.18877, 5.96046e-08)
-bones/21/rotation = Quaternion(-0.00684381, 1.79515e-06, 0.126257, 0.991974)
+bones/21/rotation = Quaternion(-0.0068438, 1.79398e-06, 0.126257, 0.991974)
 bones/21/scale = Vector3(1, 1, 1)
 
 [node name="BeastBody" type="MeshInstance3D" parent="BeastManager/beast2/Armature/Skeleton3D"]
@@ -882,7 +1070,64 @@ magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../../../ReactorApproach/BL")
 script = ExtResource("29_h023j")
 
+[node name="TurretSound" type="StudioEventEmitter3D" parent="BeastManager"]
+event = ExtResource("31_wt70y")
+preload_samples = true
+transform = Transform3D(0.99957, 0, -0.0293348, 0, 1, 0, 0.0293348, 0, 0.99957, 8.40724, 3.65226, 11.3428)
+
+[node name="GhostManager" type="Node" parent="BeastManager" node_paths=PackedStringArray("ghost")]
+script = ExtResource("33_g7ii5")
+ghost = NodePath("Ghost")
+
+[node name="Away" type="Node3D" parent="BeastManager/GhostManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.27925, 0)
+script = ExtResource("34_yf64j")
+
+[node name="HallwayBeforeTurret" type="Node3D" parent="BeastManager/GhostManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.81252, -0.904959, 18.9394)
+script = ExtResource("34_yf64j")
+room = 1
+
+[node name="HallwayAfterTurret" type="Node3D" parent="BeastManager/GhostManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.87524, 0, 7.59363)
+script = ExtResource("34_yf64j")
+room = 2
+
+[node name="HallwayBeforeDoor" type="Node3D" parent="BeastManager/GhostManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.52217, 2.38419e-07, 2.7036)
+script = ExtResource("34_yf64j")
+room = 3
+
+[node name="ServerApproach" type="Node3D" parent="BeastManager/GhostManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.94, 1.83736, 17.8776)
+script = ExtResource("34_yf64j")
+room = 4
+
+[node name="ServerEating" type="Node3D" parent="BeastManager/GhostManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0363, 1.61631, 18.5542)
+script = ExtResource("34_yf64j")
+room = 5
+
+[node name="Reactor" type="Node3D" parent="BeastManager/GhostManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.26, 1.757, -15.015)
+script = ExtResource("34_yf64j")
+room = 6
+
+[node name="Ghost" type="Sprite3D" parent="BeastManager/GhostManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.26, 1.757, -15.015)
+billboard = 1
+texture = SubResource("GradientTexture2D_bryuo")
+
+[node name="StudioEventEmitter3D" type="StudioEventEmitter3D" parent="BeastManager/GhostManager/Ghost"]
+event = SubResource("EventAsset_pgn68")
+
+[node name="TurretSound" type="StudioEventEmitter3D" parent="BeastManager/GhostManager"]
+event = ExtResource("31_wt70y")
+preload_samples = true
+transform = Transform3D(0.99957, 0, -0.0293348, 0, 1, 0, 0.0293348, 0, 0.99957, 8.40724, 3.65226, 11.3428)
+
+[connection signal="mouse_exited" from="InputWindow/Control/LineEdit" to="CamHolder" method="_on_line_edit_mouse_exited"]
 [connection signal="text_changed" from="InputWindow/Control/LineEdit" to="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer" method="_on_text_changed"]
 [connection signal="text_submitted" from="InputWindow/Control/LineEdit" to="TerminalViewport/Node3D/MarginContainer/ScrollContainer/VBoxContainer" method="_on_line_edit_text_submitted"]
-[connection signal="mouse_entered" from="screen2/Sprite3D/StaticBody3D" to="screen2/Sprite3D" method="_mouse_enter"]
-[connection signal="mouse_exited" from="screen2/Sprite3D/StaticBody3D" to="screen2/Sprite3D" method="_mouse_exit"]
+[connection signal="mouse_entered" from="screen/Sprite3D/StaticBody3D" to="screen/Sprite3D" method="_mouse_enter"]
+[connection signal="mouse_exited" from="screen/Sprite3D/StaticBody3D" to="screen/Sprite3D" method="_mouse_exit"]

@@ -1,0 +1,10 @@
+[gd_resource type="EventAsset" format=3 uid="uid://dhk8a15lsvs8x"]
+
+[resource]
+is_3d = true
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Turret"
+guid = "{45935338-b4cd-4247-b6c0-c8c3e7508023}"
+name = "Turret"

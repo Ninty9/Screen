@@ -1,0 +1,10 @@
+[gd_resource type="EventAsset" format=3 uid="uid://c3rc8ndho2l7t"]
+
+[resource]
+is_3d = true
+is_oneshot = true
+min_distance = 1.0
+max_distance = 5800.0
+path = "event:/BugNear"
+guid = "{0e4a8358-df7e-4f17-b9b7-f5525e7909c0}"
+name = "BugNear"

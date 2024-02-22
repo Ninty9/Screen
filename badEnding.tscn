@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxv6ulnlknbu0"]
+
+[sub_resource type="Theme" id="Theme_v6gvl"]
+default_font_size = 25
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 35.0
+offset_right = 1125.0
+offset_bottom = 564.0
+theme = SubResource("Theme_v6gvl")
+text = "Too bad!
+
+You sent out the wrong distress code and died shortly after. 
+how sad.
+
+Im writing this at 2 am on the last day of the deadline give me a break.
+
+Programming by Ninty
+Modeling by Ninty and Nidoskull
+Textures by Nidoskull (and some of the materials where just free stuff, you understand)
+design by Nidoskull, Ninty, And Alfamangle
+
+Made for the screamTV game jam
+Thanks for playing the game!"
